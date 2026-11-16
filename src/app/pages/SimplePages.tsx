@@ -243,44 +243,48 @@ export function ContactsPage() {
         <Container>
           <div className="grid lg:grid-cols-12 gap-6 lg:gap-8">
             <div className="lg:col-span-4 space-y-4">
-              {[
-                ...displayPhones.map((p) => ({
-                  label: t('contacts.phone'),
-                  value: p,
-                  href: `tel:${p.replace(/[^\d+]/g, '')}`,
-                })),
-                clinic?.email
-                  ? {
-                      label: t('contacts.email'),
-                      value: clinic.email,
-                      href: `mailto:${clinic.email}`,
-                    }
-                  : null,
-                clinic?.address
-                  ? { label: t('contacts.address'), value: clinic.address }
-                  : null,
-                clinic?.schedule
-                  ? { label: t('contacts.schedule'), value: clinic.schedule }
-                  : null,
-              ]
-                .filter(Boolean)
+              {(
+                [
+                  ...displayPhones.map((p) => ({
+                    label: t('contacts.phone'),
+                    value: p,
+                    href: `tel:${p.replace(/[^\d+]/g, '')}`,
+                  })),
+                  clinic?.email
+                    ? {
+                        label: t('contacts.email'),
+                        value: clinic.email,
+                        href: `mailto:${clinic.email}`,
+                      }
+                    : null,
+                  clinic?.address
+                    ? { label: t('contacts.address'), value: clinic.address, href: undefined }
+                    : null,
+                  clinic?.schedule
+                    ? { label: t('contacts.schedule'), value: clinic.schedule, href: undefined }
+                    : null,
+                ] as Array<{ label: string; value: string; href?: string } | null>
+              )
+                .filter((item): item is { label: string; value: string; href?: string } =>
+                  Boolean(item),
+                )
                 .map((item, idx) => (
                   <div
-                    key={`${item!.label}-${item!.value}-${idx}`}
+                    key={`${item.label}-${item.value}-${idx}`}
                     className="bg-white border border-[#e8e2d8] p-6"
                   >
                     <p className="text-[11px] tracking-[0.22em] uppercase text-[#c8a97e] font-semibold mb-2">
-                      {item!.label}
+                      {item.label}
                     </p>
-                    {item!.href ? (
+                    {item.href ? (
                       <a
-                        href={item!.href}
+                        href={item.href}
                         className="text-lg font-semibold hover:text-[#c8a97e] transition-colors"
                       >
-                        {item!.value}
+                        {item.value}
                       </a>
                     ) : (
-                      <p className="text-lg font-semibold">{item!.value}</p>
+                      <p className="text-lg font-semibold">{item.value}</p>
                     )}
                   </div>
                 ))}
