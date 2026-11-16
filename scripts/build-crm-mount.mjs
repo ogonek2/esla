@@ -89,7 +89,7 @@ export function mountCrmBookingWidget(
   const CONFIG = {
     BASE_URL: (userConfig.baseUrl || 'https://1cloud.in.ua/EslaSSE/hs/SiteServiceEntry').replace(/\\/$/, ''),
     CLINIC_NAME: userConfig.clinicName || 'ESLA',
-    CLINIC_PHONES: userConfig.clinicPhones?.length ? userConfig.clinicPhones : ['+380991370582'],
+    CLINIC_PHONES: userConfig.clinicPhones?.length ? userConfig.clinicPhones : [],
     DRY_RUN: userConfig.dryRun !== false,
     ENTRIES_PATH: userConfig.entriesPath || '/entries',
   };

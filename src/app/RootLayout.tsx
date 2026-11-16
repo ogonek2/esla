@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { Header } from '@/features/clinic/Header'
 import { Footer } from '@/features/clinic/Footer'
+import { ClinicAnalytics } from '@/features/clinic/ClinicAnalytics'
 import { ClinicProvider } from '@/features/clinic/ClinicProvider'
 import { useLocale } from '@/shared/lib/locale'
 import { ScrollToTop } from '@/app/ScrollToTop'
@@ -12,6 +13,7 @@ export function RootLayout() {
 
   return (
     <ClinicProvider>
+      <ClinicAnalytics />
       <ScrollToTop />
       <CatalogPrefetch />
       <div className="min-h-screen flex flex-col">

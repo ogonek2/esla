@@ -25,8 +25,8 @@ type ClinicContextValue = {
 
 const ClinicContext = createContext<ClinicContextValue | null>(null)
 
-const FALLBACK_PHONE =
-  (import.meta.env.VITE_PHONE_FALLBACK as string | undefined) || '+380991370582'
+/** Only used before clinic settings load / if phones are empty in admin. */
+const FALLBACK_PHONE = (import.meta.env.VITE_PHONE_FALLBACK as string | undefined)?.trim() || ''
 
 export function ClinicProvider({ children }: { children: ReactNode }) {
   const { locale } = useLocale()

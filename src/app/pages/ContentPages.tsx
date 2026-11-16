@@ -11,6 +11,7 @@ import { CardGridSkeleton, Skeleton, SkeletonText } from '@/shared/ui/Skeleton'
 import { DarkCtaBand, PageHero, WarmPage } from '@/shared/ui/PageHero'
 import { AmbientGlow, GoldRule, ServiceArt } from '@/features/services/ServiceArt'
 import { PostContent } from '@/features/blog/PostContent'
+import { ShareButtons } from '@/features/blog/ShareButtons'
 import { RichHtml } from '@/shared/ui/RichHtml'
 
 export function BlogPage() {
@@ -153,6 +154,8 @@ export function BlogPostPage() {
       <Seo
         title={post.seo?.title || post.title}
         description={post.seo?.description || post.excerpt || undefined}
+        image={post.cover_url}
+        type="article"
       />
 
       <section className="relative overflow-hidden bg-[#111110] text-white -mt-20 pt-20">
@@ -177,10 +180,11 @@ export function BlogPostPage() {
           <GoldRule className="mb-4" />
           <h1 className="text-4xl lg:text-5xl font-display leading-tight mb-3">{post.title}</h1>
           {post.published_at && (
-            <p className="text-white/45 text-sm">
+            <p className="text-white/45 text-sm mb-5">
               {new Date(post.published_at).toLocaleDateString(locale)}
             </p>
           )}
+          <ShareButtons title={post.title} tone="dark" />
         </div>
       </section>
 
@@ -203,10 +207,11 @@ export function BlogPostPage() {
           </div>
         )}
 
-        <div className="mx-auto w-full max-w-5xl px-5 sm:px-8 mt-14 pt-10 border-t border-[#e8e2d8]">
+        <div className="mx-auto w-full max-w-5xl px-5 sm:px-8 mt-14 pt-10 border-t border-[#e8e2d8] flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8">
+          <ShareButtons title={post.title} />
           <Link
             to={localizedPath(locale, routes.booking)}
-            className="inline-flex bg-[#111110] text-white px-8 py-4 text-[13px] font-bold uppercase tracking-wide hover:bg-[#333] transition-colors"
+            className="inline-flex bg-[#111110] text-white px-8 py-4 text-[13px] font-bold uppercase tracking-wide hover:bg-[#333] transition-colors shrink-0"
           >
             {t('services.cta')}
           </Link>

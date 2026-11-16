@@ -32,7 +32,6 @@ export function CrmBookingWidget() {
   const phones = useMemo(() => {
     const list = (clinic?.phones || []).map(formatPhoneDisplay).filter(Boolean)
     if (!list.length && phone) list.push(formatPhoneDisplay(phone))
-    if (!list.length) list.push('+380 99 137 05 82')
     return list
   }, [clinic?.phones, phone])
 

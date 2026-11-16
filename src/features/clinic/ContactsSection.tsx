@@ -1,11 +1,15 @@
 import { useTranslation } from 'react-i18next'
 import { useClinic } from '@/features/clinic/ClinicProvider'
+import { clinicPhones } from '@/features/clinic/clinicLinks'
+import { SocialLinks } from '@/features/clinic/SocialLinks'
+import { telHref } from '@/shared/lib/utils'
 import { Container, Section } from '@/shared/ui/layout'
 
 export function ContactsSection() {
   const { t } = useTranslation()
   const { clinic, phone, phoneHref } = useClinic()
-  const messengers = clinic?.messengers || {}
+  const phones = clinicPhones(clinic?.phones)
+  const displayPhones = phones.length ? phones : phone ? [phone] : []
 
   return (
     <Section id="contacts" tone="dark">
@@ -19,17 +23,50 @@ export function ContactsSection() {
               {t('contacts.title')}
             </h2>
             <div className="space-y-6">
-              <div>
-                <p className="text-[11px] tracking-widest uppercase text-white/40 mb-1">
-                  {t('contacts.phone')}
-                </p>
-                <a
-                  href={phoneHref}
-                  className="text-[18px] font-semibold hover:text-[#c8a97e] transition-colors"
-                >
-                  {phone}
-                </a>
-              </div>
+              {displayPhones.length > 0 && (
+                <div>
+                  <p className="text-[11px] tracking-widest uppercase text-white/40 mb-1">
+                    {t('contacts.phone')}
+                  </p>
+                  <div className="space-y-1">
+                    {displayPhones.map((p) => (
+                      <a
+                        key={p}
+                        href={telHref(p)}
+                        className="block text-[18px] font-semibold hover:text-[#c8a97e] transition-colors"
+                      >
+                        {p}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {!displayPhones.length && phoneHref && (
+                <div>
+                  <p className="text-[11px] tracking-widest uppercase text-white/40 mb-1">
+                    {t('contacts.phone')}
+                  </p>
+                  <a
+                    href={phoneHref}
+                    className="text-[18px] font-semibold hover:text-[#c8a97e] transition-colors"
+                  >
+                    {phone}
+                  </a>
+                </div>
+              )}
+              {clinic?.email && (
+                <div>
+                  <p className="text-[11px] tracking-widest uppercase text-white/40 mb-1">
+                    {t('contacts.email')}
+                  </p>
+                  <a
+                    href={`mailto:${clinic.email}`}
+                    className="text-[15px] font-semibold hover:text-[#c8a97e] transition-colors"
+                  >
+                    {clinic.email}
+                  </a>
+                </div>
+              )}
               {clinic?.address && (
                 <div>
                   <p className="text-[11px] tracking-widest uppercase text-white/40 mb-1">
@@ -47,21 +84,7 @@ export function ContactsSection() {
                 </div>
               )}
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {Object.entries(messengers)
-                .filter(([, url]) => Boolean(url))
-                .map(([name, url]) => (
-                  <a
-                    key={name}
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 border border-white/20 text-[11px] tracking-wide uppercase font-semibold hover:border-[#c8a97e] hover:text-[#c8a97e] transition-colors"
-                  >
-                    {name}
-                  </a>
-                ))}
-            </div>
+            <SocialLinks tone="dark" includeMessengers className="mt-8" />
           </div>
           <div className="lg:col-span-8 bg-[#1a1a18] flex items-center justify-center min-h-72 overflow-hidden">
             {clinic?.map?.embed_url ? (

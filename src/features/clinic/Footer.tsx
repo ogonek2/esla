@@ -1,17 +1,21 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useClinic } from '@/features/clinic/ClinicProvider'
+import { clinicPhones } from '@/features/clinic/clinicLinks'
+import { SocialLinks } from '@/features/clinic/SocialLinks'
 import { useLocale } from '@/shared/lib/locale'
 import { localizedPath, routes } from '@/shared/config/routes'
+import { telHref } from '@/shared/lib/utils'
 import { LanguageSwitcher } from '@/shared/ui/LanguageSwitcher'
 import { Container } from '@/shared/ui/layout'
 
 export function Footer() {
   const { t } = useTranslation()
   const { locale } = useLocale()
-  const { phone, phoneHref } = useClinic()
+  const { clinic, phone, phoneHref } = useClinic()
   const lp = (path: string) => localizedPath(locale, path)
   const year = new Date().getFullYear()
+  const phones = clinicPhones(clinic?.phones)
 
   const columns = [
     {
@@ -51,14 +55,49 @@ export function Footer() {
             <span className="text-xl tracking-[0.25em] font-semibold font-display block mb-3">
               {t('brand')}
             </span>
-            <p className="text-[13px] text-white/40 leading-relaxed mb-4">{t('footer.blurb')}</p>
-            <a
-              href={phoneHref}
-              className="text-[14px] font-semibold hover:text-[#c8a97e] transition-colors"
-            >
-              {phone}
-            </a>
+            <p className="text-[13px] text-white/40 leading-relaxed mb-5">
+              {clinic?.address
+                ? t('footer.blurb_with_place', { place: clinic.address })
+                : t('footer.blurb')}
+            </p>
+
+            <div className="space-y-2 mb-5">
+              {(phones.length ? phones : phone ? [phone] : []).map((p) => (
+                <a
+                  key={p}
+                  href={telHref(p)}
+                  className="block text-[14px] font-semibold hover:text-[#c8a97e] transition-colors"
+                >
+                  {p}
+                </a>
+              ))}
+              {!phones.length && !phone && phoneHref ? (
+                <a
+                  href={phoneHref}
+                  className="block text-[14px] font-semibold hover:text-[#c8a97e] transition-colors"
+                >
+                  {phone}
+                </a>
+              ) : null}
+              {clinic?.email && (
+                <a
+                  href={`mailto:${clinic.email}`}
+                  className="block text-[13px] text-white/55 hover:text-[#c8a97e] transition-colors"
+                >
+                  {clinic.email}
+                </a>
+              )}
+              {clinic?.address && (
+                <p className="text-[13px] text-white/45 leading-relaxed pt-1">{clinic.address}</p>
+              )}
+              {clinic?.schedule && (
+                <p className="text-[12px] text-white/35 leading-relaxed">{clinic.schedule}</p>
+              )}
+            </div>
+
+            <SocialLinks tone="dark" size="sm" includeMessengers className="mt-1" />
           </div>
+
           {columns.map((col) => (
             <div key={col.title}>
               <p className="text-[11px] tracking-widest uppercase text-white/30 mb-4 font-semibold">

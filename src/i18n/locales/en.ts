@@ -16,7 +16,7 @@ export default {
     search: 'Search',
   },
   hero: {
-    eyebrow: 'Medical center · Kyiv',
+    eyebrow: 'Medical center',
     title_line1: 'Premium',
     title_line2: 'plastic',
     title_line3: 'surgery',
@@ -35,7 +35,7 @@ export default {
   endoliftPage: {
     seo_title: 'ENDOLIFT® — laser platform at ESLA',
     seo_description:
-      'ENDOLIFT® (Eufoton LASEmaR 1500) at ESLA medical center: skin tightening and laser lipolysis. Consultation in Kyiv.',
+      'ENDOLIFT® (Eufoton LASEmaR 1500) at ESLA medical center: skin tightening and laser lipolysis.',
     eyebrow: 'Equipment · ESLA',
     hero_title: 'Effective laser treatment in a single session',
     hero_text:
@@ -186,7 +186,7 @@ export default {
     related_eyebrow: 'In this category',
     related_title: 'Related services',
     trust: {
-      a: { label: 'Kyiv', text: 'Appointments at Esla medical center' },
+      a: { label: 'Clinic', text: 'Appointments at Esla medical center' },
       b: { label: 'Plan', text: 'Individual consultation before the procedure' },
       c: { label: 'Clarity', text: 'Listed prices or confirmation at the visit' },
     },
@@ -227,11 +227,13 @@ export default {
     page_subtitle: 'Notes on booking, clinic directions and the price list.',
     empty: 'Articles will appear soon.',
     read: 'Read',
+    share: 'Share',
+    copy_link: 'Copy link',
   },
   doctors: {
     eyebrow: 'Team',
     title: 'Our doctors',
-    page_subtitle: 'Specialist profiles at Esla medical center in Kyiv.',
+    page_subtitle: 'Specialist profiles at Esla medical center.',
     empty: 'Doctor profiles will appear soon.',
     book: 'Book',
     years: 'years of experience',
@@ -263,6 +265,11 @@ export default {
         desc: 'Sterilization protocols, anesthesia support, documentation.',
       },
     },
+  },
+  instagram: {
+    eyebrow: 'Instagram',
+    title: 'Reels & clinic life',
+    subtitle: 'Fresh frames from procedures, results and the ESLA atmosphere.',
   },
   portfolio: {
     eyebrow: 'Results',
@@ -315,6 +322,7 @@ export default {
     title: 'Esla Medical center',
     page_subtitle: 'Phone, address and a convenient way to reach us.',
     phone: 'Phone',
+    email: 'Email',
     address: 'Address',
     schedule: 'Working hours',
     map_placeholder: 'Map will be added after the address is confirmed',
@@ -329,7 +337,8 @@ export default {
     book: 'Book',
   },
   footer: {
-    blurb: 'Premium plastic surgery and cosmetology in Kyiv.',
+    blurb: 'Premium plastic surgery and cosmetology.',
+    blurb_with_place: 'Premium plastic surgery and cosmetology · {{place}}',
     copyright: '© {{year}} Esla Medical center. All rights reserved.',
     legal: 'Legal',
     privacy: 'Privacy Policy',

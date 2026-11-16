@@ -114,6 +114,12 @@ export type Page = {
   seo?: SeoFields
 }
 
+export type SocialLink = {
+  label: string
+  url: string
+  icon: string
+}
+
 export type Clinic = {
   phones: string[]
   messengers: Record<string, string>
@@ -124,7 +130,8 @@ export type Clinic = {
     lat?: string | null
     lng?: string | null
   }
-  social: Record<string, string>
+  /** Structured social items from admin (legacy key→url also normalized by API). */
+  social: SocialLink[] | Record<string, string>
   email?: string | null
   analytics: {
     ga4_id?: string | null

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useClinic } from '@/features/clinic/ClinicProvider'
+import { SocialLinks } from '@/features/clinic/SocialLinks'
 import { useLocale } from '@/shared/lib/locale'
 import { localizedPath, routes } from '@/shared/config/routes'
 import { Container } from '@/shared/ui/layout'
@@ -10,7 +11,10 @@ import { ServiceArt } from '@/features/services/ServiceArt'
 export function HeroSection() {
   const { t } = useTranslation()
   const { locale } = useLocale()
-  const { phone, phoneHref } = useClinic()
+  const { clinic, phone, phoneHref } = useClinic()
+  const eyebrow = clinic?.address
+    ? `${t('tagline')} · ${clinic.address}`
+    : t('hero.eyebrow')
 
   return (
     <section className="relative min-h-[100svh] bg-[#111110] text-white flex items-end overflow-hidden -mt-20 pt-20">
@@ -44,9 +48,12 @@ export function HeroSection() {
 
       <Container className="relative z-10 pb-20 lg:pb-28 pt-32 w-full">
         <div className="max-w-5xl">
+          <Reveal delay={40}>
+            <SocialLinks tone="gold" size="sm" className="mb-5" />
+          </Reveal>
           <Reveal delay={80}>
             <p className="text-[12px] md:text-[13px] tracking-[0.4em] uppercase text-[#c8a97e] font-semibold mb-7">
-              {t('hero.eyebrow')}
+              {eyebrow}
             </p>
           </Reveal>
           <Reveal delay={160}>

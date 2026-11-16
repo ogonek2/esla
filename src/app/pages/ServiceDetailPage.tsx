@@ -21,7 +21,7 @@ export function ServiceDetailPage() {
   const { slug = '' } = useParams()
   const { t } = useTranslation()
   const { locale } = useLocale()
-  const { phone, phoneHref } = useClinic()
+  const { clinic, phone, phoneHref } = useClinic()
   const [service, setService] = useState<Service | null>(null)
   const [faq, setFaq] = useState<FaqItem[]>([])
   const [related, setRelated] = useState<Service[]>([])
@@ -80,10 +80,18 @@ export function ServiceDetailPage() {
 
   const steps = customSteps.length > 0 ? customSteps : defaultSteps
 
-  const defaultTrust = (['a', 'b', 'c'] as const).map((key) => ({
-    label: t(`service.trust.${key}.label`),
-    text: t(`service.trust.${key}.text`),
-  }))
+  const defaultTrust = (['a', 'b', 'c'] as const).map((key) => {
+    if (key === 'a' && clinic?.address) {
+      return {
+        label: clinic.address,
+        text: t('service.trust.a.text'),
+      }
+    }
+    return {
+      label: t(`service.trust.${key}.label`),
+      text: t(`service.trust.${key}.text`),
+    }
+  })
 
   const customTrust = (service?.trust_items || []).filter((item) => item.label || item.text)
   const trustItems = customTrust.length > 0 ? customTrust : defaultTrust
@@ -123,6 +131,7 @@ export function ServiceDetailPage() {
       <Seo
         title={service.seo?.title || service.name}
         description={service.seo?.description || service.short_description || undefined}
+        image={heroImage}
       />
 
       {/* Cinematic hero — typography over atmosphere, no side card */}

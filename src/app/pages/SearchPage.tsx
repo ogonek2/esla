@@ -47,7 +47,7 @@ export function SearchPage() {
 
   return (
     <WarmPage>
-      <Seo title={t('search.title')} />
+      <Seo title={t('search.title')} noindex />
       <PageHero
         eyebrow={t('nav.search')}
         title={t('search.title')}

@@ -11,13 +11,14 @@ import type {
   ServiceCategory,
 } from '@/shared/lib/types'
 import { useLocale } from '@/shared/lib/locale'
-import { Seo } from '@/features/seo/Seo'
+import { Seo, homeJsonLd } from '@/features/seo/Seo'
 import { HeroSection } from '@/features/clinic/HeroSection'
 import { EndoliftSection } from '@/features/services/EndoliftSection'
 import { ServicesSection } from '@/features/services/ServicesSection'
 import { DoctorsSection } from '@/features/doctors/DoctorsSection'
 import { WhyEslaSection } from '@/features/clinic/WhyEslaSection'
 import { PortfolioSection } from '@/features/portfolio/PortfolioSection'
+import { InstagramFeedSection } from '@/features/clinic/InstagramFeedSection'
 import { ReviewsSection } from '@/features/reviews/ReviewsSection'
 import { BlogSection } from '@/features/blog/BlogSection'
 import { FaqSection } from '@/features/faq/FaqSection'
@@ -50,7 +51,18 @@ type HomeBundle = {
 export function HomePage() {
   const { t } = useTranslation()
   const { locale } = useLocale()
-  const { phone } = useClinic()
+  const { phone, clinic } = useClinic()
+  const sameAs = Array.isArray(clinic?.social)
+    ? clinic.social.map((s) => s.url).filter(Boolean)
+    : clinic?.social
+      ? Object.values(clinic.social).filter(Boolean)
+      : []
+  const orgLd = homeJsonLd({
+    phone,
+    email: clinic?.email,
+    address: clinic?.address,
+    sameAs,
+  })
   const [bundle, setBundle] = useState<HomeBundle | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -128,7 +140,7 @@ export function HomePage() {
   if (loading && !bundle) {
     return (
       <>
-        <Seo description={t('hero.subtitle')} />
+        <Seo description={t('hero.subtitle')} jsonLd={orgLd} />
         <HeroSection />
         <HomeSkeleton />
       </>
@@ -139,13 +151,14 @@ export function HomePage() {
 
   return (
     <>
-      <Seo description={t('hero.subtitle')} />
+      <Seo description={t('hero.subtitle')} jsonLd={orgLd} />
       <HeroSection />
       <EndoliftSection featured={data.featured} />
       <ServicesSection categories={data.categories} minPrices={minPrices} />
       <DoctorsSection doctors={data.doctors} />
       <WhyEslaSection />
       <PortfolioSection cases={data.portfolio} />
+      <InstagramFeedSection />
       <ReviewsSection reviews={data.reviews} />
       <BlogSection posts={data.posts} />
       <FaqSection items={data.faq} />

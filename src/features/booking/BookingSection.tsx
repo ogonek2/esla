@@ -34,12 +34,33 @@ export function BookingSection({ services }: { services: Service[] }) {
                   {phone}
                 </a>
               </div>
+              {clinic?.email && (
+                <div>
+                  <p className="text-[11px] text-[#6b6b68] uppercase tracking-widest mb-1">
+                    {t('contacts.email')}
+                  </p>
+                  <a
+                    href={`mailto:${clinic.email}`}
+                    className="text-[15px] font-semibold text-[#111110] hover:text-[#c8a97e] transition-colors"
+                  >
+                    {clinic.email}
+                  </a>
+                </div>
+              )}
               {clinic?.address && (
                 <div>
                   <p className="text-[11px] text-[#6b6b68] uppercase tracking-widest mb-1">
                     {t('booking.address_label')}
                   </p>
                   <p className="text-[15px] font-semibold text-[#111110]">{clinic.address}</p>
+                </div>
+              )}
+              {clinic?.schedule && (
+                <div>
+                  <p className="text-[11px] text-[#6b6b68] uppercase tracking-widest mb-1">
+                    {t('contacts.schedule')}
+                  </p>
+                  <p className="text-[15px] font-semibold text-[#111110]">{clinic.schedule}</p>
                 </div>
               )}
             </div>

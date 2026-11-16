@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://esla.ua/sitemap.xml
+Disallow: /search
+Disallow: /en/search
+Disallow: /ru/search
+
+Sitemap: https://esla.com.ua/sitemap.xml

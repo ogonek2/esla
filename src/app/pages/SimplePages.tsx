@@ -9,6 +9,7 @@ import { Seo } from '@/features/seo/Seo'
 import { LeadForm } from '@/features/booking/LeadForm'
 import { CrmBookingWidget } from '@/features/booking/CrmBookingWidget'
 import { useClinic } from '@/features/clinic/ClinicProvider'
+import { SocialLinks } from '@/features/clinic/SocialLinks'
 import { Container } from '@/shared/ui/layout'
 import { Skeleton, SkeletonText } from '@/shared/ui/Skeleton'
 import { DarkCtaBand, PageHero, WarmPage } from '@/shared/ui/PageHero'
@@ -214,7 +215,8 @@ export function ContactsPage() {
   const { t } = useTranslation()
   const { locale } = useLocale()
   const { clinic, phone, phoneHref } = useClinic()
-  const messengers = clinic?.messengers || {}
+  const phones = (clinic?.phones || []).map((p) => String(p || '').trim()).filter(Boolean)
+  const displayPhones = phones.length ? phones : phone ? [phone] : []
 
   return (
     <WarmPage>
@@ -226,12 +228,14 @@ export function ContactsPage() {
         art={2}
         image="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=900&fit=crop&auto=format"
         actions={
-          <a
-            href={phoneHref}
-            className="inline-flex bg-[#c8a97e] text-[#111110] px-7 py-3.5 text-[13px] font-bold uppercase tracking-wide hover:bg-[#b8966b] transition-colors"
-          >
-            {phone}
-          </a>
+          phoneHref ? (
+            <a
+              href={phoneHref}
+              className="inline-flex bg-[#c8a97e] text-[#111110] px-7 py-3.5 text-[13px] font-bold uppercase tracking-wide hover:bg-[#b8966b] transition-colors"
+            >
+              {phone || t('sticky.call')}
+            </a>
+          ) : undefined
         }
       />
 
@@ -240,21 +244,29 @@ export function ContactsPage() {
           <div className="grid lg:grid-cols-12 gap-6 lg:gap-8">
             <div className="lg:col-span-4 space-y-4">
               {[
-                { label: t('contacts.phone'), value: phone, href: phoneHref },
+                ...displayPhones.map((p) => ({
+                  label: t('contacts.phone'),
+                  value: p,
+                  href: `tel:${p.replace(/[^\d+]/g, '')}`,
+                })),
+                clinic?.email
+                  ? {
+                      label: t('contacts.email'),
+                      value: clinic.email,
+                      href: `mailto:${clinic.email}`,
+                    }
+                  : null,
                 clinic?.address
                   ? { label: t('contacts.address'), value: clinic.address }
                   : null,
                 clinic?.schedule
                   ? { label: t('contacts.schedule'), value: clinic.schedule }
                   : null,
-                clinic?.email
-                  ? { label: 'Email', value: clinic.email, href: `mailto:${clinic.email}` }
-                  : null,
               ]
                 .filter(Boolean)
-                .map((item) => (
+                .map((item, idx) => (
                   <div
-                    key={item!.label}
+                    key={`${item!.label}-${item!.value}-${idx}`}
                     className="bg-white border border-[#e8e2d8] p-6"
                   >
                     <p className="text-[11px] tracking-[0.22em] uppercase text-[#c8a97e] font-semibold mb-2">
@@ -273,21 +285,7 @@ export function ContactsPage() {
                   </div>
                 ))}
 
-              <div className="flex flex-wrap gap-2 pt-2">
-                {Object.entries(messengers)
-                  .filter(([, url]) => Boolean(url))
-                  .map(([name, url]) => (
-                    <a
-                      key={name}
-                      href={url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-4 py-2 border border-[#e8e2d8] bg-white text-[11px] tracking-wide uppercase font-semibold hover:border-[#c8a97e] hover:text-[#c8a97e] transition-colors"
-                    >
-                      {name}
-                    </a>
-                  ))}
-              </div>
+              <SocialLinks tone="light" includeMessengers className="pt-2" />
             </div>
 
             <div className="lg:col-span-8 bg-[#161412] min-h-[22rem] flex items-center justify-center overflow-hidden border border-[#e8e2d8]">
@@ -354,6 +352,19 @@ export function BookingPage() {
                 >
                   {phone}
                 </a>
+                {clinic?.email && (
+                  <div className="mt-5 pt-5 border-t border-[#e8e2d8]">
+                    <p className="text-[11px] tracking-[0.22em] uppercase text-[#c8a97e] font-semibold mb-2">
+                      {t('contacts.email')}
+                    </p>
+                    <a
+                      href={`mailto:${clinic.email}`}
+                      className="font-semibold text-[15px] leading-snug hover:text-[#c8a97e] transition-colors break-all"
+                    >
+                      {clinic.email}
+                    </a>
+                  </div>
+                )}
                 {clinic?.address && (
                   <div className="mt-5 pt-5 border-t border-[#e8e2d8]">
                     <p className="text-[11px] tracking-[0.22em] uppercase text-[#c8a97e] font-semibold mb-2">

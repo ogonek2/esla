@@ -18,12 +18,13 @@ export function formatPriceFrom(price: number | null | undefined, locale = 'uk',
 }
 
 export function telHref(phone: string): string {
-  const digits = phone.replace(/[^\d+]/g, '')
-  return `tel:${digits}`
+  const digits = (phone || '').replace(/[^\d+]/g, '')
+  return digits ? `tel:${digits}` : ''
 }
 
 export function primaryPhone(phones: string[] | undefined, fallback: string): string {
-  return phones?.[0] || fallback
+  const first = (phones || []).map((p) => String(p || '').trim()).find(Boolean)
+  return first || fallback || ''
 }
 
 export function getUtmParams(search: string): Record<string, string> {

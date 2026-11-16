@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom'
 import { useClinic } from '@/features/clinic/ClinicProvider'
 import { useLocale } from '@/shared/lib/locale'
 import { localizedPath, routes } from '@/shared/config/routes'
+import { SocialLinks } from '@/features/clinic/SocialLinks'
 import { LanguageSwitcher } from '@/shared/ui/LanguageSwitcher'
 import { Container } from '@/shared/ui/layout'
 import { useEffect, useState } from 'react'
@@ -129,24 +130,30 @@ export function Header() {
           </nav>
 
           <div className="shrink-0 border-t border-white/10 px-5 sm:px-8 pt-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] space-y-4">
+            <SocialLinks tone="gold" size="sm" includeMessengers />
+
             <div className="flex flex-wrap items-center justify-between gap-3">
               <LanguageSwitcher />
-              <a
-                href={phoneHref}
-                className="text-[13px] tracking-wide text-white/60 hover:text-[#c8a97e] transition-colors"
-              >
-                {phone}
-              </a>
+              {phone && phoneHref ? (
+                <a
+                  href={phoneHref}
+                  className="text-[13px] tracking-wide text-white/60 hover:text-[#c8a97e] transition-colors"
+                >
+                  {phone}
+                </a>
+              ) : null}
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <a
-                href={phoneHref}
-                className="inline-flex items-center justify-center gap-2 border border-white/20 px-4 py-3.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white hover:border-[#c8a97e] hover:text-[#c8a97e] transition-colors"
-              >
-                <PhoneIcon />
-                {t('sticky.call')}
-              </a>
+            <div className={`grid gap-3 ${phoneHref ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {phoneHref ? (
+                <a
+                  href={phoneHref}
+                  className="inline-flex items-center justify-center gap-2 border border-white/20 px-4 py-3.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white hover:border-[#c8a97e] hover:text-[#c8a97e] transition-colors"
+                >
+                  <PhoneIcon />
+                  {t('sticky.call')}
+                </a>
+              ) : null}
               <Link
                 to={lp(routes.booking)}
                 onClick={() => setMenuOpen(false)}
@@ -199,21 +206,25 @@ export function Header() {
               <LanguageSwitcher />
             </div>
 
-            <a
-              href={phoneHref}
-              className="hidden md:flex items-center gap-2 bg-[#111110] text-white text-[13px] font-semibold px-4 py-2 hover:bg-[#333] transition-colors duration-200 tracking-wide"
-            >
-              <PhoneIcon />
-              {phone}
-            </a>
+            {phone && phoneHref ? (
+              <a
+                href={phoneHref}
+                className="hidden md:flex items-center gap-2 bg-[#111110] text-white text-[13px] font-semibold px-4 py-2 hover:bg-[#333] transition-colors duration-200 tracking-wide"
+              >
+                <PhoneIcon />
+                {phone}
+              </a>
+            ) : null}
 
-            <a
-              href={phoneHref}
-              className="md:hidden inline-flex items-center justify-center gap-1.5 h-9 sm:h-10 px-2.5 sm:px-3 border border-[#111110] text-[#111110] text-[11px] font-bold uppercase tracking-wide hover:bg-[#111110] hover:text-white transition-colors"
-            >
-              <PhoneIcon />
-              <span>{t('sticky.call')}</span>
-            </a>
+            {phoneHref ? (
+              <a
+                href={phoneHref}
+                className="md:hidden inline-flex items-center justify-center gap-1.5 h-9 sm:h-10 px-2.5 sm:px-3 border border-[#111110] text-[#111110] text-[11px] font-bold uppercase tracking-wide hover:bg-[#111110] hover:text-white transition-colors"
+              >
+                <PhoneIcon />
+                <span>{t('sticky.call')}</span>
+              </a>
+            ) : null}
             <Link
               to={lp(routes.booking)}
               className="md:hidden inline-flex items-center justify-center h-9 sm:h-10 px-2.5 sm:px-3 bg-[#c8a97e] text-[#111110] text-[11px] font-bold uppercase tracking-wide hover:bg-[#d4b896] transition-colors"
