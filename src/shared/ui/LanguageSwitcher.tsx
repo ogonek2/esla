@@ -19,7 +19,7 @@ export function LanguageSwitcher() {
   const basePath = stripLocalePrefix(location.pathname)
 
   return (
-    <div className="flex items-center gap-1 text-[12px] border border-[#e2e1de] rounded-sm">
+    <div className="flex items-center gap-1 text-[12px] border border-current/20 rounded-sm text-inherit">
       {LOCALES.map((l) => {
         const label = l === 'uk' ? 'UA' : l.toUpperCase()
         const to = localizedPath(l, basePath) + location.search
@@ -28,7 +28,9 @@ export function LanguageSwitcher() {
             key={l}
             to={to}
             className={`px-2.5 py-1 text-[11px] font-semibold tracking-wider transition-colors ${
-              current === l ? 'bg-[#111110] text-white' : 'text-[#6b6b68] hover:text-[#111110]'
+              current === l
+                ? 'bg-[#c8a97e] text-[#111110]'
+                : 'text-current/55 hover:text-current'
             }`}
           >
             {label}

@@ -44,7 +44,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-[#0d0d0c] text-white py-16 pb-24 lg:pb-16">
+    <footer className="bg-[#0d0d0c] text-white py-16">
       <Container>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>

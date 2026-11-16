@@ -108,7 +108,7 @@ export function SectionHeader({
         )}
         <h2
           className={cn(
-            'text-display font-normal font-display',
+            'text-display font-normal font-display break-words [overflow-wrap:anywhere]',
             dark ? 'text-white' : 'text-[#111110]',
           )}
         >
@@ -167,7 +167,9 @@ export function PageTitle({
             {eyebrow}
           </p>
         )}
-        <h1 className="text-display font-display">{title}</h1>
+        <h1 className="text-display font-display break-words [overflow-wrap:anywhere]">
+          {title}
+        </h1>
         {subtitle && (
           <p className="mt-4 text-lead text-[#6b6b68] max-w-2xl">{subtitle}</p>
         )}

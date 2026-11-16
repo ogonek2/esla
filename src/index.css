@@ -22,9 +22,9 @@
   --font-sans: 'Manrope', system-ui, sans-serif;
 
   --site-max: 1920px;
-  --text-hero: clamp(3.25rem, 7.2vw, 7.75rem);
-  --text-display: clamp(2.5rem, 4.8vw, 5rem);
-  --text-title: clamp(2rem, 3.2vw, 3.5rem);
+  --text-hero: clamp(2.15rem, 8.2vw, 7.75rem);
+  --text-display: clamp(1.85rem, 5.4vw, 5rem);
+  --text-title: clamp(1.55rem, 4vw, 3.5rem);
   --text-lead: clamp(1.125rem, 1.35vw, 1.35rem);
   --text-body: clamp(1rem, 1.05vw, 1.125rem);
 }
@@ -36,6 +36,16 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+}
+
+/* Hide Binotel GetCall while mobile menu is open */
+body.menu-open #bingc-phone-button,
+body.menu-open #bingc-passive,
+body.menu-open #bingc-active,
+body.menu-open [id^='bingc-'] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 body {
@@ -60,19 +70,31 @@ body {
 
 .text-hero {
   font-size: var(--text-hero);
-  line-height: 1.02;
+  line-height: 1.08;
   letter-spacing: -0.02em;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .text-display {
   font-size: var(--text-display);
-  line-height: 1.08;
+  line-height: 1.12;
   letter-spacing: -0.015em;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .text-title {
   font-size: var(--text-title);
-  line-height: 1.12;
+  line-height: 1.15;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .text-lead {

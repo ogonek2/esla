@@ -55,10 +55,13 @@ export function PageHero({
       </Parallax>
 
       <Container
-        className={cn('relative z-10', compact ? 'py-16 lg:py-20' : 'py-20 lg:py-28 xl:py-32')}
+        className={cn(
+          'relative z-10 min-w-0',
+          compact ? 'py-16 lg:py-20' : 'py-20 lg:py-28 xl:py-32',
+        )}
       >
-        <div className="grid lg:grid-cols-12 gap-12 items-end">
-          <div className="lg:col-span-8 xl:col-span-9">
+        <div className="grid lg:grid-cols-12 gap-12 items-end min-w-0">
+          <div className="lg:col-span-8 xl:col-span-9 min-w-0">
             {eyebrow && (
               <Reveal>
                 <p className="text-[12px] md:text-[13px] tracking-[0.4em] uppercase text-[#c8a97e] font-semibold mb-6">
@@ -70,7 +73,9 @@ export function PageHero({
               <GoldRule className="mb-7 w-16 md:w-20" />
             </Reveal>
             <Reveal delay={140}>
-              <h1 className="text-hero font-display font-normal mb-6 max-w-5xl">{title}</h1>
+              <h1 className="text-hero font-display font-normal mb-6 max-w-5xl break-words [overflow-wrap:anywhere]">
+                {title}
+              </h1>
             </Reveal>
             {subtitle && (
               <Reveal delay={240}>

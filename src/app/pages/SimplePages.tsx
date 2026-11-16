@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { api } from '@/shared/lib/api'
-import type { FaqItem, Review, Service } from '@/shared/lib/types'
+import type { FaqItem, Review } from '@/shared/lib/types'
 import { useLocale } from '@/shared/lib/locale'
 import { localizedPath, routes } from '@/shared/config/routes'
 import { Seo } from '@/features/seo/Seo'
 import { LeadForm } from '@/features/booking/LeadForm'
+import { CrmBookingWidget } from '@/features/booking/CrmBookingWidget'
 import { useClinic } from '@/features/clinic/ClinicProvider'
 import { Container } from '@/shared/ui/layout'
 import { Skeleton, SkeletonText } from '@/shared/ui/Skeleton'
 import { DarkCtaBand, PageHero, WarmPage } from '@/shared/ui/PageHero'
-import { AmbientGlow, GoldRule } from '@/features/services/ServiceArt'
+import { GoldRule } from '@/features/services/ServiceArt'
 
 export function ReviewsPage() {
   const { t } = useTranslation()
@@ -321,25 +322,7 @@ export function ContactsPage() {
 
 export function BookingPage() {
   const { t } = useTranslation()
-  const { locale } = useLocale()
   const { phone, phoneHref, clinic } = useClinic()
-  const [services, setServices] = useState<Service[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    let cancelled = false
-    ;(async () => {
-      try {
-        const r = await api.services(locale, { per_page: 100 })
-        if (!cancelled) setServices(r.data)
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
-    })()
-    return () => {
-      cancelled = true
-    }
-  }, [locale])
 
   return (
     <WarmPage>
@@ -352,54 +335,43 @@ export function BookingPage() {
         image="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1400&h=900&fit=crop&auto=format"
       />
 
-      <section className="py-14 lg:py-20">
+      <section className="py-8 sm:py-12 lg:py-16 pb-28 sm:pb-16">
         <Container>
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            <div className="lg:col-span-5 space-y-6">
-              <div className="bg-white border border-[#e8e2d8] p-7">
-                <GoldRule className="mb-5" />
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+            <div className="lg:col-span-8 min-w-0 order-1">
+              <CrmBookingWidget />
+            </div>
+
+            <aside className="lg:col-span-4 order-2 lg:sticky lg:top-24">
+              <div className="bg-white border border-[#e8e2d8] p-5 sm:p-7">
+                <GoldRule className="mb-4 sm:mb-5" />
                 <p className="text-[11px] tracking-[0.22em] uppercase text-[#c8a97e] font-semibold mb-2">
                   {t('booking.phone_label')}
                 </p>
                 <a
                   href={phoneHref}
-                  className="text-2xl font-display hover:text-[#c8a97e] transition-colors"
+                  className="text-xl sm:text-2xl font-display hover:text-[#c8a97e] transition-colors break-all"
                 >
                   {phone}
                 </a>
                 {clinic?.address && (
-                  <div className="mt-6 pt-6 border-t border-[#e8e2d8]">
+                  <div className="mt-5 pt-5 border-t border-[#e8e2d8]">
                     <p className="text-[11px] tracking-[0.22em] uppercase text-[#c8a97e] font-semibold mb-2">
                       {t('booking.address_label')}
                     </p>
-                    <p className="font-semibold">{clinic.address}</p>
+                    <p className="font-semibold text-[15px] leading-snug">{clinic.address}</p>
                   </div>
                 )}
                 {clinic?.schedule && (
-                  <div className="mt-6 pt-6 border-t border-[#e8e2d8]">
+                  <div className="mt-5 pt-5 border-t border-[#e8e2d8]">
                     <p className="text-[11px] tracking-[0.22em] uppercase text-[#c8a97e] font-semibold mb-2">
                       {t('contacts.schedule')}
                     </p>
-                    <p className="font-semibold">{clinic.schedule}</p>
+                    <p className="font-semibold text-[15px] leading-snug">{clinic.schedule}</p>
                   </div>
                 )}
               </div>
-            </div>
-
-            <div className="lg:col-span-7 relative bg-[#111110] text-white p-8 lg:p-10 border border-white/10">
-              <AmbientGlow className="opacity-50" />
-              <div className="relative z-10">
-                <p className="text-[11px] tracking-[0.3em] uppercase text-[#c8a97e] font-semibold mb-3">
-                  {t('booking.eyebrow')}
-                </p>
-                <h2 className="font-display text-3xl mb-6">{t('service.book_title')}</h2>
-                {loading ? (
-                  <SkeletonText lines={6} className="[&_.skeleton-block]:bg-white/10" />
-                ) : (
-                  <LeadForm type="booking" services={services} variant="dark" />
-                )}
-              </div>
-            </div>
+            </aside>
           </div>
         </Container>
       </section>
