@@ -35,6 +35,18 @@ class DatabaseSeeder extends Seeder
                 'whatsapp' => '',
                 'viber' => '',
             ],
+            'social' => [
+                [
+                    'label' => 'Instagram',
+                    'url' => 'https://instagram.com/',
+                    'icon' => 'fa-brands fa-instagram',
+                ],
+                [
+                    'label' => 'Facebook',
+                    'url' => 'https://facebook.com/',
+                    'icon' => 'fa-brands fa-facebook-f',
+                ],
+            ],
             'address' => [
                 'uk' => 'Київ',
                 'en' => 'Kyiv',
@@ -48,8 +60,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'info@esla.ua',
         ]);
 
-        $this->seedCategoriesAndServices();
         $this->seedPages();
+        // Full price catalog + About page from clinic price list / brief (after pages so About wins)
+        $this->call(PriceListSeeder::class);
         $this->seedFaq();
         $this->seedDoctors();
         $this->seedPosts();

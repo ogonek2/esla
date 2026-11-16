@@ -3,9 +3,12 @@
 namespace App\Filament\Pages;
 
 use App\Models\ClinicSetting;
+use App\Support\SocialNetworks;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -40,8 +43,10 @@ class ManageClinicSettings extends Page
     public function mount(): void
     {
         $settings = ClinicSetting::current();
+        $payload = $settings->attributesToArray();
+        $payload['social'] = SocialNetworks::normalize($settings->social);
 
-        $this->form->fill($settings->attributesToArray());
+        $this->form->fill($payload);
     }
 
     public function form(Schema $schema): Schema
@@ -59,11 +64,41 @@ class ManageClinicSettings extends Page
                         ->label('Месенджери')
                         ->keyLabel('Канал')
                         ->valueLabel('Посилання / номер'),
-                    KeyValue::make('social')
-                        ->label('Соцмережі')
-                        ->keyLabel('Мережа')
-                        ->valueLabel('URL'),
                 ]),
+                Section::make('Соціальні мережі')
+                    ->description('Додайте мережі айтемами. Іконки — Font Awesome 6 (brands / solid).')
+                    ->schema([
+                        Repeater::make('social')
+                            ->label('Мережі')
+                            ->defaultItems(0)
+                            ->collapsible()
+                            ->cloneable()
+                            ->reorderable()
+                            ->itemLabel(fn (array $state): ?string => $state['label'] ?? 'Соцмережа')
+                            ->schema([
+                                TextInput::make('label')
+                                    ->label('Назва')
+                                    ->required()
+                                    ->placeholder('Instagram'),
+                                TextInput::make('url')
+                                    ->label('URL / посилання')
+                                    ->required()
+                                    ->placeholder('https://instagram.com/esla'),
+                                Select::make('icon')
+                                    ->label('Іконка Font Awesome')
+                                    ->options(SocialNetworks::iconOptions())
+                                    ->searchable()
+                                    ->required()
+                                    ->default('fa-brands fa-instagram')
+                                    ->helperText('Клас FA, напр. fa-brands fa-instagram'),
+                                TextInput::make('icon_custom')
+                                    ->label('Кастомний клас FA (опційно)')
+                                    ->placeholder('fa-brands fa-discord')
+                                    ->helperText('Якщо заповнено — перекриває вибір вище при збереженні'),
+                            ])
+                            ->columns(2)
+                            ->columnSpanFull(),
+                    ]),
                 Section::make('Адреса та графік')->schema([
                     KeyValue::make('address')
                         ->label('Адреса (uk/en/ru)')
@@ -110,9 +145,33 @@ class ManageClinicSettings extends Page
     {
         $data = $this->form->getState();
 
+        $social = [];
+        foreach ($data['social'] ?? [] as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+            $custom = trim((string) ($row['icon_custom'] ?? ''));
+            $icon = $custom !== '' ? $custom : trim((string) ($row['icon'] ?? ''));
+            $url = trim((string) ($row['url'] ?? ''));
+            $label = trim((string) ($row['label'] ?? ''));
+            if ($url === '' || $label === '') {
+                continue;
+            }
+            $social[] = [
+                'label' => $label,
+                'url' => $url,
+                'icon' => $icon !== '' ? $icon : SocialNetworks::guessIcon($label),
+            ];
+        }
+        $data['social'] = $social;
+
         $settings = ClinicSetting::current();
         $settings->fill($data);
         $settings->save();
+
+        foreach (config('esla.locales', ['uk', 'en', 'ru']) as $locale) {
+            \Illuminate\Support\Facades\Cache::forget("clinic.{$locale}");
+        }
 
         Notification::make()
             ->title('Збережено')

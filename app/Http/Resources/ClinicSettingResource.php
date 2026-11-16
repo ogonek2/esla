@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Support\SocialNetworks;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -26,7 +27,7 @@ class ClinicSettingResource extends JsonResource
                 'lat' => $this->map_lat,
                 'lng' => $this->map_lng,
             ],
-            'social' => $this->social ?? [],
+            'social' => SocialNetworks::normalize($this->social),
             'email' => $this->email,
             'analytics' => [
                 'ga4_id' => $this->ga4_id,

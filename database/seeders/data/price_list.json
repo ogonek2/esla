@@ -1,0 +1,756 @@
+[
+  {
+    "slug": "consultations",
+    "name": {
+      "uk": "Консультації",
+      "en": "Consultations",
+      "ru": "Консультации"
+    },
+    "description": {
+      "uk": "Первинні консультації спеціалістів клініки",
+      "en": "Первинні консультації спеціалістів клініки",
+      "ru": "Первинні консультації спеціалістів клініки"
+    },
+    "featured": false,
+    "services": [
+      {
+        "slug": "lor-consultation",
+        "name": "Консультація ЛОРа",
+        "price": 1290,
+        "featured": false
+      },
+      {
+        "slug": "dermatosurgeon-consultation",
+        "name": "Консультація дерматохірурга/дерматолога із дерматоскопією",
+        "price": 1290,
+        "featured": false
+      },
+      {
+        "slug": "plastic-surgeon-consultation",
+        "name": "Консультація пластичного хірурга",
+        "price": 990,
+        "featured": false
+      },
+      {
+        "slug": "weight-management-program",
+        "name": "Комплексне ведення з приводу зниження маси тіла, 5 консультацій суміжних спеціальністів, план обстеження, лікування, повний супровід напротязі 3х міс",
+        "price": 9900,
+        "featured": false,
+        "price_label": "3 міс"
+      },
+      {
+        "slug": "trichologist-consultation",
+        "name": "Консультація трихолога із трихоскопією",
+        "price": 1290,
+        "featured": false
+      },
+      {
+        "slug": "cosmetologist-consultation",
+        "name": "Консультація косметолога/підбір догляду",
+        "price": 690,
+        "featured": false
+      },
+      {
+        "slug": "rehabilitologist-consultation",
+        "name": "Консультація реабілітолога",
+        "price": 690,
+        "featured": false
+      }
+    ]
+  },
+  {
+    "slug": "otolaryngology",
+    "name": {
+      "uk": "Отоларингологія",
+      "en": "Otolaryngology",
+      "ru": "Отоларингология"
+    },
+    "description": {
+      "uk": "Лікування захворювань вуха, горла та носа",
+      "en": "Treatment of ear, nose and throat conditions",
+      "ru": "Лечение заболеваний уха, горла и носа"
+    },
+    "featured": false,
+    "services": [
+      {
+        "slug": "tonsil-lacunae-washing",
+        "name": "Промивання лакун мигдаликів",
+        "price": 700,
+        "featured": false
+      },
+      {
+        "slug": "cuckoo-nasal-toilet",
+        "name": "Туалет носової порожнини, «кукушка»",
+        "price": 700,
+        "featured": false
+      }
+    ]
+  },
+  {
+    "slug": "endolift",
+    "name": {
+      "uk": "Ендоліфт",
+      "en": "Endolift",
+      "ru": "Эндолифт"
+    },
+    "description": {
+      "uk": "Лазерна підтяжка шкіри та розщеплення жиру",
+      "en": "Лазерна підтяжка шкіри та розщеплення жиру",
+      "ru": "Лазерна підтяжка шкіри та розщеплення жиру"
+    },
+    "featured": true,
+    "services": [
+      {
+        "slug": "endolift-face",
+        "name": "Ендоліфт обличчя, 1 одноразова насадка",
+        "price": 38900,
+        "featured": true
+      },
+      {
+        "slug": "endolift-double-chin",
+        "name": "Ендоліфт друге підборіддя, 1 однорзова насадка",
+        "price": 26900,
+        "featured": true
+      },
+      {
+        "slug": "endolift-neck",
+        "name": "Ендоліфт шия, 1 дноразова насадка",
+        "price": 34900,
+        "featured": true
+      },
+      {
+        "slug": "endolift-face-neck",
+        "name": "Ендоліфт обличчя+ шия повністю, 2 дноразові насадки",
+        "price": 54000,
+        "featured": true
+      },
+      {
+        "slug": "endolift-thighs",
+        "name": "Ендоліфт, бедра (\"вушка\"), 1 одноразова насадка",
+        "price": 38900,
+        "featured": true
+      },
+      {
+        "slug": "endolift-knees",
+        "name": "Ендоліфт коліна, 1 одноразова насадка",
+        "price": 38900,
+        "featured": true
+      },
+      {
+        "slug": "endolift-abdomen",
+        "name": "Ендоліфт живіт, 1 одноразова насадка",
+        "price": 38900,
+        "featured": true
+      },
+      {
+        "slug": "endolift-abdomen-sides",
+        "name": "Ендоліфт живіт + бока, 2 одноразові насадки",
+        "price": 54000,
+        "featured": true
+      },
+      {
+        "slug": "endolift-buttocks",
+        "name": "Ендоліфт сідниці (+ \"вушка\"), 2 одноразові насадки",
+        "price": 54000,
+        "featured": true
+      },
+      {
+        "slug": "endolift-legs-full",
+        "name": "Ендоліфт ноги повністю (під загальною анестезією), 2 одноразові насадки",
+        "price": 90000,
+        "featured": true
+      },
+      {
+        "slug": "endolift-abdomen-legs",
+        "name": "Ендоліфт живіт+ ноги (під загальною анестезією), 3одноразові насадки",
+        "price": 110000,
+        "featured": true
+      },
+      {
+        "slug": "endolift-arms",
+        "name": "Ендоліфт руки, 1 одноразова насадка",
+        "price": 38900,
+        "featured": true
+      },
+      {
+        "slug": "endolift-back",
+        "name": "Ендоліфт спина, 2 дноразові насадки",
+        "price": 54000,
+        "featured": true
+      },
+      {
+        "slug": "endolift-wings",
+        "name": "Ендоліфт \"Крила\", 1 одноразова насадка",
+        "price": 38900,
+        "featured": true
+      },
+      {
+        "slug": "endolift-back-wings",
+        "name": "Ендоліфт спина + \"крила\" (під загальною анестезією), 3 одноразові насадки",
+        "price": 110000,
+        "featured": true
+      },
+      {
+        "slug": "endolift-liposuction-extra",
+        "name": "Ліпосакція додатково",
+        "price": 36900,
+        "featured": false
+      },
+      {
+        "slug": "general-anesthesia-1h",
+        "name": "Загальна анестезія, 1 год (додатково, де не включено)",
+        "price": 5500,
+        "featured": false
+      },
+      {
+        "slug": "endolift-extra-fiber",
+        "name": "Кожна додаткова насадка",
+        "price": 18900,
+        "featured": false
+      }
+    ]
+  },
+  {
+    "slug": "body-care",
+    "name": {
+      "uk": "Масаж та догляд за тілом",
+      "en": "Massage and body care",
+      "ru": "Массаж и уход за телом"
+    },
+    "description": {
+      "uk": "Апаратний і ручний масаж, обгортання",
+      "en": "Апаратний і ручний масаж, обгортання",
+      "ru": "Апаратний і ручний масаж, обгортання"
+    },
+    "featured": false,
+    "services": [
+      {
+        "slug": "body-complex-60",
+        "name": "Комплекс 60хв ендосфера/вібросфера/веллашейп (ноги, сідниці, живіт)",
+        "price": 1100,
+        "featured": false
+      },
+      {
+        "slug": "body-complex-90",
+        "name": "Комплекс 90хв ендосфера/вібросфера/веллашейп (все тіло)",
+        "price": 1600,
+        "featured": false
+      },
+      {
+        "slug": "endosphere-face-40",
+        "name": "Ендосфера обличчя 40хв (+ трапеція та шия)",
+        "price": 700,
+        "featured": false
+      },
+      {
+        "slug": "massage-course-5x40",
+        "name": "Курс 5 масажів по 40хв",
+        "price": 3500,
+        "featured": false
+      },
+      {
+        "slug": "massage-course-5x60",
+        "name": "Курс 5 масажів по 60хв",
+        "price": 5000,
+        "featured": false
+      },
+      {
+        "slug": "massage-course-5x90",
+        "name": "Курс 5 масажів по 90хв",
+        "price": 7500,
+        "featured": false
+      },
+      {
+        "slug": "body-wrap",
+        "name": "Обгортання (зволожуюче, розслабляюче, антицелюлітне (Arosha|DMK)",
+        "price": 2200,
+        "featured": false
+      },
+      {
+        "slug": "body-wrap-course-5",
+        "name": "Курс 5 обгортань",
+        "price": 9900,
+        "featured": false
+      },
+      {
+        "slug": "classic-massage",
+        "name": "Загальний класичний/лікувальний/ спортивний масаж (ручний)",
+        "price": 1500,
+        "featured": false
+      }
+    ]
+  },
+  {
+    "slug": "injection-cosmetology",
+    "name": {
+      "uk": "Інʼєкційна косметологія",
+      "en": "Injectable cosmetology",
+      "ru": "Инъекционная космеология"
+    },
+    "description": {
+      "uk": "Ботокс, мезотерапія, філери, екзосоми",
+      "en": "Ботокс, мезотерапія, філери, екзосоми",
+      "ru": "Ботокс, мезотерапія, філери, екзосоми"
+    },
+    "featured": false,
+    "services": [
+      {
+        "slug": "botox-unit",
+        "name": "Ботокс, 1 ОД, Fortox (GB)",
+        "price": 120,
+        "featured": false
+      },
+      {
+        "slug": "botox-forehead",
+        "name": "Ботокс лоб (міжбрівка, лоб, “гусячі лапки”, ніс)",
+        "price": 5500,
+        "featured": false
+      },
+      {
+        "slug": "botox-full-face",
+        "name": "Ботокс Full face (міжбрівка, лоб, “гусячі лапки”, н/третина, шия) Fortox (GB)",
+        "price": 7800,
+        "featured": false
+      },
+      {
+        "slug": "botox-hyperhidrosis",
+        "name": "Ботокс лікування гіпергідрозу (долоні/пахви/стопи), за 1 зону, Fortox (GB)",
+        "price": 8500,
+        "featured": false
+      },
+      {
+        "slug": "mesotherapy-twac-eyes",
+        "name": "Мезотерапія, TwAc eyes 1ml",
+        "price": 4900,
+        "featured": false
+      },
+      {
+        "slug": "mesotherapy-hair-loss",
+        "name": "Мезотерапія, Hair loss, Іспанія",
+        "price": 2400,
+        "featured": false
+      },
+      {
+        "slug": "mesotherapy-jalupro",
+        "name": "Мезотерапія Jalupro PLUS 2ml",
+        "price": 3400,
+        "featured": false
+      },
+      {
+        "slug": "biorevitalization-twac",
+        "name": "Біоревіталізація TwAc 2,0 3ml",
+        "price": 7800,
+        "featured": false
+      },
+      {
+        "slug": "biorevitalization-twac-2",
+        "name": "Біоревіталізація TwAc 2,0 3ml (варіант 2)",
+        "price": 8200,
+        "featured": false
+      },
+      {
+        "slug": "lip-augmentation",
+        "name": "Збільшення губ Phillex 1,1ml",
+        "price": 6800,
+        "featured": false
+      },
+      {
+        "slug": "face-contour-phillex",
+        "name": "Контурна пластика обличчя (підборіддя, скули) Phillex 1,1ml",
+        "price": 7800,
+        "featured": false
+      },
+      {
+        "slug": "collagen-stimulators",
+        "name": "Колагеностимулятори (гідрооксиапатит кальцію, Radisse)",
+        "price": 14100,
+        "featured": false
+      },
+      {
+        "slug": "juvelook",
+        "name": "Полімолочна кислота, Juvelook 8ml",
+        "price": 24500,
+        "featured": false
+      },
+      {
+        "slug": "gana-v",
+        "name": "Gana V, 15ml",
+        "price": 24500,
+        "featured": false
+      },
+      {
+        "slug": "gana-x",
+        "name": "Gana X, 15ml",
+        "price": 52400,
+        "featured": false
+      },
+      {
+        "slug": "pb-serum-triad",
+        "name": "Тріада PB Serum, 5ml (один флакон)",
+        "price": 1800,
+        "featured": false
+      },
+      {
+        "slug": "plasma-therapy",
+        "name": "Плазмотерапія, 1 пробірка",
+        "price": 1200,
+        "featured": false
+      },
+      {
+        "slug": "exosomes-alopecia-course",
+        "name": "Екзосоми, курс при алопеції (3 процедури), Good Cells, Україна",
+        "price": 28900,
+        "featured": false,
+        "price_label": "3 процедури"
+      },
+      {
+        "slug": "exosomes-skin-course",
+        "name": "Екзосоми, для відновлення шкіри, курс 3 процедури, Good Cells, Україна",
+        "price": 34500,
+        "featured": false,
+        "price_label": "3 процедури"
+      },
+      {
+        "slug": "exosomes-after-peel",
+        "name": "Екзосоми після хімічного пілінгу",
+        "price": 5500,
+        "featured": false,
+        "price_label": "1 процедура"
+      }
+    ]
+  },
+  {
+    "slug": "cosmetology",
+    "name": {
+      "uk": "Базова та апаратна косметологія",
+      "en": "Basic and hardware cosmetology",
+      "ru": "Базовая и аппаратная космеология"
+    },
+    "description": {
+      "uk": "Доглядові процедури та апаратна косметологія",
+      "en": "Доглядові процедури та апаратна косметологія",
+      "ru": "Доглядові процедури та апаратна косметологія"
+    },
+    "featured": false,
+    "services": [
+      {
+        "slug": "peel-classic",
+        "name": "Пілінг (азелаїновий, саліциловий, молочний, мигдальний); 40 хв.",
+        "price": 900,
+        "featured": false
+      },
+      {
+        "slug": "peel-prx",
+        "name": "Пілінг PRX-33/APPEX,  1 флакон; 40 хв.",
+        "price": 3600,
+        "featured": false
+      },
+      {
+        "slug": "enzyme-therapy-dmk",
+        "name": "Ферментотерапія,  DMK; 90хв.",
+        "price": 2800,
+        "featured": false
+      },
+      {
+        "slug": "acne-treatment-dmk",
+        "name": "Лікування акне ( глибоке очищення за допомогою космецевтики DMK); 90 хв.",
+        "price": 2500,
+        "featured": false
+      },
+      {
+        "slug": "ultrasonic-facial",
+        "name": "Ультразвукова чистка обличчя; 60 хв.",
+        "price": 1100,
+        "featured": false
+      },
+      {
+        "slug": "microcurrent-face",
+        "name": "Масаж обличчя за допомогою мікротоків; 30 хв.",
+        "price": 600,
+        "featured": false
+      },
+      {
+        "slug": "lightscan-face",
+        "name": "Неабляційний фракційний лазер LightScan обличчя; 1 процедура; 30 хв.",
+        "price": 4500,
+        "featured": false
+      },
+      {
+        "slug": "lightscan-neck-decollete",
+        "name": "Неабляційний фракційний лазер LightScan шия+декольте; 1 процедура; 50 хв.",
+        "price": 5500,
+        "featured": false
+      },
+      {
+        "slug": "lightscan-face-neck-decollete",
+        "name": "Неабляційний фракційний лазер LightScan обличчя + шия + декольте;1 процедура; 60 хв.",
+        "price": 7000,
+        "featured": false
+      },
+      {
+        "slug": "lightscan-back",
+        "name": "Неабляційний фракційний лазер LightScan  спина; 1 процедура; 60 хв.",
+        "price": 6500,
+        "featured": false
+      },
+      {
+        "slug": "lightscan-bikini",
+        "name": "Неабляційний фракційний лазер LightScan зона бікіні; 1 процедура; 60 хв.",
+        "price": 7800,
+        "featured": false
+      },
+      {
+        "slug": "lightscan-small",
+        "name": "Неабляційний фракційний лазер LightScan маленькі ділянки, до 10 см; 10 хв.",
+        "price": 1500,
+        "featured": false
+      }
+    ]
+  },
+  {
+    "slug": "face-neck-plastics",
+    "name": {
+      "uk": "Пластика обличчя та шиї",
+      "en": "Face and neck plastics",
+      "ru": "Пластика лица и шеи"
+    },
+    "description": {
+      "uk": "Естетична корекція та омолодження (вартість «під ключ»)",
+      "en": "Естетична корекція та омолодження (вартість «під ключ»)",
+      "ru": "Естетична корекція та омолодження (вартість «під ключ»)"
+    },
+    "featured": false,
+    "services": [
+      {
+        "slug": "blepharoplasty-circular",
+        "name": "Блефаропластика кругова",
+        "price": 69900,
+        "featured": false
+      },
+      {
+        "slug": "blepharoplasty-upper",
+        "name": "Блефаропластика верхня (під м/а)",
+        "price": 29000,
+        "featured": false
+      },
+      {
+        "slug": "blepharoplasty-lower",
+        "name": "Блефаропластика нижня, в т.ч транскон’юктивальна",
+        "price": 36900,
+        "featured": false
+      },
+      {
+        "slug": "temporal-brow-lift",
+        "name": "Скроневий ліфтинг, броуліфтинг",
+        "price": 42900,
+        "featured": false
+      },
+      {
+        "slug": "lower-third-lift",
+        "name": "Нижня третина обличчя",
+        "price": 79900,
+        "featured": false
+      },
+      {
+        "slug": "facelift-circular",
+        "name": "Кругова підтяжка обличчя",
+        "price": 96500,
+        "featured": false
+      },
+      {
+        "slug": "face-neck-lift",
+        "name": "Підтяжка обличчя та шиї",
+        "price": 119000,
+        "featured": false
+      },
+      {
+        "slug": "chin-liporeduction",
+        "name": "Ліпоредукція підборіддя під м/а",
+        "price": 89000,
+        "featured": false
+      },
+      {
+        "slug": "otoplasty",
+        "name": "Отопластика (під м/а)",
+        "price": 38900,
+        "featured": false
+      },
+      {
+        "slug": "face-lipofilling",
+        "name": "Ліпофілінг обличчя (під м/а)",
+        "price": 12900,
+        "featured": false
+      },
+      {
+        "slug": "bisha-removal",
+        "name": "Видалення комків Біша",
+        "price": 34000,
+        "featured": false
+      },
+      {
+        "slug": "cheiloplasty",
+        "name": "Хейлопластика",
+        "price": 28900,
+        "featured": false
+      },
+      {
+        "slug": "earlobe-plasty",
+        "name": "Пластика мочки вуха (під м/а)",
+        "price": 28000,
+        "featured": false
+      },
+      {
+        "slug": "scar-excision-5cm",
+        "name": "Висічення рубців до 5см (під м/а)",
+        "price": 3800,
+        "featured": false
+      },
+      {
+        "slug": "scar-excision-10cm",
+        "name": "Висічення рубця до 10 см",
+        "price": 5400,
+        "featured": false
+      },
+      {
+        "slug": "hump-liporeduction",
+        "name": "Ліпоредукція холки",
+        "price": 48900,
+        "featured": false
+      }
+    ]
+  },
+  {
+    "slug": "lor-surgery",
+    "name": {
+      "uk": "ЛОР-хірургія",
+      "en": "ENT surgery",
+      "ru": "ЛОР-хирургия"
+    },
+    "description": {
+      "uk": "Оперативне лікування за принципом «під ключ»",
+      "en": "Оперативне лікування за принципом «під ключ»",
+      "ru": "Оперативне лікування за принципом «під ключ»"
+    },
+    "featured": false,
+    "services": [
+      {
+        "slug": "septoplasty",
+        "name": "Септопластика",
+        "price": 38900,
+        "featured": false
+      },
+      {
+        "slug": "rhinoplasty-partial",
+        "name": "Ринопластика часткова",
+        "price": 78900,
+        "featured": false
+      },
+      {
+        "slug": "rhinoplasty-full",
+        "name": "Ринопластика повна",
+        "price": 139000,
+        "featured": false
+      },
+      {
+        "slug": "rhinoseptoplasty",
+        "name": "Риносептопластика",
+        "price": 156000,
+        "featured": false
+      },
+      {
+        "slug": "rhinoplasty-cartilage",
+        "name": "Ринопластика із забором власного хряща",
+        "price": 189000,
+        "featured": false
+      },
+      {
+        "slug": "laser-snoring",
+        "name": "Лазерне лікування храпу",
+        "price": 48900,
+        "featured": false
+      }
+    ]
+  },
+  {
+    "slug": "dermatosurgery",
+    "name": {
+      "uk": "Дерматохірургія",
+      "en": "Dermatosurgery",
+      "ru": "Дерматохирургия"
+    },
+    "description": {
+      "uk": "Видалення новоутворень та біопсія",
+      "en": "Видалення новоутворень та біопсія",
+      "ru": "Видалення новоутворень та біопсія"
+    },
+    "featured": false,
+    "services": [
+      {
+        "slug": "papilloma-1",
+        "name": "Видалення папіломи/бородавки (1шт)",
+        "price": 450,
+        "featured": false
+      },
+      {
+        "slug": "papilloma-5-10",
+        "name": "Видалення папіломи/бородавки (5-10шт)",
+        "price": 1800,
+        "featured": false
+      },
+      {
+        "slug": "papilloma-10-20",
+        "name": "Видалення папіломи/бородавки (10-20шт)",
+        "price": 2500,
+        "featured": false
+      },
+      {
+        "slug": "molluscum-10",
+        "name": "Видалення контангіозного молюска (до 10шт)",
+        "price": 2500,
+        "featured": false
+      },
+      {
+        "slug": "molluscum-10-20",
+        "name": "Видалення контангіозного молюска (10-20шт)",
+        "price": 3500,
+        "featured": false
+      },
+      {
+        "slug": "biopsy-1",
+        "name": "Біопсія 1кат складності",
+        "price": 1000,
+        "featured": false
+      },
+      {
+        "slug": "biopsy-2",
+        "name": "Біопсія 2 кат складності (обличчя)",
+        "price": 1500,
+        "featured": false
+      },
+      {
+        "slug": "biopsy-3",
+        "name": "Біопсія 3 кат складності (інтимні ділянки)",
+        "price": 2000,
+        "featured": false
+      },
+      {
+        "slug": "benign-removal-1",
+        "name": "Видалення доброякісних новоутворень шкіри  1кат",
+        "price": 800,
+        "featured": false
+      },
+      {
+        "slug": "benign-removal-2",
+        "name": "Видалення доброякісних новоутворень шкіри (обличчя)2кат",
+        "price": 1200,
+        "featured": false
+      },
+      {
+        "slug": "benign-removal-3",
+        "name": "Видалення доброякісних новоутворень шкіри (інтимні ділянки) 3кат",
+        "price": 2000,
+        "featured": false
+      }
+    ]
+  }
+]
