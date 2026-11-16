@@ -85,7 +85,20 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
       body: options.body ? JSON.stringify(options.body) : undefined,
     })
 
-    const json = await response.json().catch(() => ({}))
+    const contentType = response.headers.get('content-type') || ''
+    const raw = await response.text()
+    const looksJson = contentType.includes('application/json') || /^[\s\r\n]*[{[]/.test(raw)
+    let json: unknown = {}
+    if (looksJson && raw) {
+      try {
+        json = JSON.parse(raw)
+      } catch {
+        throw new ApiError('Invalid JSON response from API', response.status || 502)
+      }
+    } else if (response.ok) {
+      // SPA/HTML fallback (wrong API base URL / rewrite) — treat as hard failure
+      throw new ApiError('API returned non-JSON response', response.status || 502)
+    }
 
     if (!response.ok) {
       throw new ApiError(

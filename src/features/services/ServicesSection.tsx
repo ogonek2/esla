@@ -19,7 +19,7 @@ export function ServicesSection({
   const { t } = useTranslation()
   const { locale } = useLocale()
 
-  if (!categories.length) {
+  if (!categories?.length) {
     return (
       <Section id="services" className="bg-[#f7f4ef]">
         <Container>

@@ -4,7 +4,7 @@ import { Container, Section, SectionHeader } from '@/shared/ui/layout'
 
 export function ReviewsSection({ reviews }: { reviews: Review[] }) {
   const { t } = useTranslation()
-  if (!reviews.length) return null
+  if (!reviews?.length) return null
 
   return (
     <Section id="reviews" tone="dark">

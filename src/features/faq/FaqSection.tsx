@@ -9,7 +9,7 @@ export function FaqSection({ items }: { items: FaqItem[] }) {
   const { phoneHref } = useClinic()
   const [openIdx, setOpenIdx] = useState<number | null>(0)
 
-  if (!items.length) return null
+  if (!items?.length) return null
 
   return (
     <Section id="faq" tone="white">

@@ -11,7 +11,7 @@ import { ServiceArt } from '@/features/services/ServiceArt'
 export function EndoliftSection({ featured }: { featured: Service[] }) {
   const { t } = useTranslation()
   const { locale } = useLocale()
-  const zones = featured.filter((s) => s.name).slice(0, 5)
+  const zones = (featured || []).filter((s) => s.name).slice(0, 5)
 
   return (
     <Section tone="dark" id="endolift" className="overflow-x-clip">

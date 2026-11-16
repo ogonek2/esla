@@ -11,7 +11,7 @@ import { Reveal } from '@/shared/ui/motion'
 export function DoctorsSection({ doctors }: { doctors: Doctor[] }) {
   const { t } = useTranslation()
   const { locale } = useLocale()
-  const list = doctors.slice(0, 8)
+  const list = (doctors || []).slice(0, 8)
 
   if (!list.length) return null
 

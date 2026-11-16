@@ -69,7 +69,7 @@ export function PortfolioSection({ cases }: { cases: PortfolioCase[] }) {
   const stripRef = useRef<HTMLDivElement>(null)
   const nudgeTimer = useRef<number | null>(null)
 
-  const visible = useMemo(() => cases, [cases])
+  const visible = useMemo(() => cases || [], [cases])
 
   // Exactly 3 identical sequences → CSS translates by -33.333% for a seamless loop
   const sequences = useMemo(() => [0, 1, 2] as const, [])

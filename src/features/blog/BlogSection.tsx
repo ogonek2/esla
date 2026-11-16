@@ -9,7 +9,7 @@ import { ServiceArt } from '@/features/services/ServiceArt'
 export function BlogSection({ posts }: { posts: Post[] }) {
   const { t } = useTranslation()
   const { locale } = useLocale()
-  const list = posts.slice(0, 3)
+  const list = (posts || []).slice(0, 3)
 
   if (!list.length) return null
 

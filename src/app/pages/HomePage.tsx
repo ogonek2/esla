@@ -76,14 +76,14 @@ export function HomePage() {
         ])
         if (cancelled) return
         setBundle({
-          categories: cats,
-          services: allServices.data,
-          featured: featuredRes.data,
-          doctors: docs.data,
-          portfolio: port.data,
-          reviews: revs.data,
-          posts: blog.data,
-          faq: faqs,
+          categories: cats || [],
+          services: allServices?.data || [],
+          featured: featuredRes?.data || [],
+          doctors: docs?.data || [],
+          portfolio: port?.data || [],
+          reviews: revs?.data || [],
+          posts: blog?.data || [],
+          faq: faqs || [],
         })
       } catch {
         if (!cancelled) setError(true)
