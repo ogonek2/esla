@@ -17,8 +17,23 @@ import type {
   ServiceDetailResponse,
 } from './types'
 
-const API_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '')
-  || (import.meta.env.DEV ? '/api/v1' : 'http://127.0.0.1:1212/api/v1')
+const PROD_API_URL = 'https://api.esla.com.ua/api/v1'
+
+function resolveApiUrl(): string {
+  const raw = (import.meta.env.VITE_API_URL as string | undefined)?.trim().replace(/\/$/, '')
+  // Local Vite uses relative `/api/v1` + server.proxy (VITE_API_PROXY_TARGET).
+  // In a production build that relative path hits the frontend host and 404s —
+  // always prefer the absolute API host outside DEV.
+  if (import.meta.env.DEV) {
+    return raw || '/api/v1'
+  }
+  if (!raw || raw.startsWith('/')) {
+    return PROD_API_URL
+  }
+  return raw
+}
+
+const API_URL = resolveApiUrl()
 
 export class ApiError extends Error {
   status: number
