@@ -9,7 +9,7 @@ from pathlib import Path
 
 import openpyxl
 
-SRC = Path(r"c:\Users\ytlem\Downloads\Telegram Desktop\ПРАЙС ЕСЛА (2).xlsx")
+SRC = Path(r"c:\Users\ytlem\Downloads\Telegram Desktop\ПРАЙС ЕСЛА (3).xlsx")
 OUT = Path(__file__).with_name("price_list.json")
 
 UK_MAP = {
@@ -35,6 +35,13 @@ SHEET_META = {
         "Consultations",
         "Консультации",
         "Первинні консультації спеціалістів клініки",
+    ),
+    "Діагностика": (
+        "diagnostics",
+        "Діагностика",
+        "Diagnostics",
+        "Диагностика",
+        "Дерматоскопія, біопсія та місцева анестезія",
     ),
     "ЕНДОЛІФТ": (
         "endolift",
@@ -90,6 +97,22 @@ SHEET_META = {
 KNOWN_SLUGS = {
     "Консультація ЛОРа": "lor-consultation",
     "Консультація дерматохірурга/дерматолога із дерматоскопією": "dermatosurgeon-consultation",
+    "Консультація дерматохірурга": "dermatosurgeon-consultation",
+    "Консультація онкодерматолога": "oncodermatologist-consultation",
+    "Консультація дитячого дерматолога": "pediatric-dermatologist-consultation",
+    "Дерматоскопія новоутворень (до 3х елементів)": "dermatoscopy-up-to-3",
+    "Дерматоскопія новоутворень (від 3 до 10)": "dermatoscopy-3-to-10",
+    "Дерматоскопія новоутворень (понад 10)": "dermatoscopy-over-10",
+    "Панч біопсія шкіри": "punch-biopsy",
+    "Інфільтраційна місцева анестезія": "infiltration-anesthesia",
+    "Масаж обличчя, 30хв": "face-massage-30",
+    "Курс 10 масажів обличчя по 30хв": "face-massage-course-10x30",
+    "Кріодеструкція 1-5 елементів": "cryodestruction-1-5",
+    "Кріодеструкція 5-10 елементів": "cryodestruction-5-10",
+    "Кріодеструкція понад 10 елементів": "cryodestruction-over-10",
+    "додатково оплачується ПГД (до 3зразків)": "histology-pgd",
+    "загальна анестезія додатково 1 год": "plastic-general-anesthesia",
+    "Додатково оплачується ПГД (до 3 зразків)": "histology-pgd",
     "Консультація пластичного хірурга": "plastic-surgeon-consultation",
     "Комплексне ведення з приводу зниження маси тіла, 5 консультацій суміжних спеціальністів, план обстеження, лікування, повний супровід напротязі 3х міс": "weight-management-program",
     "Консультація трихолога із трихоскопією": "trichologist-consultation",
@@ -229,7 +252,9 @@ def parse_sheet(ws, cat_slug: str, used: set[str]) -> list[dict]:
             if re.match(r"^\d+\.?$", s):
                 continue
             if s.startswith("*"):
-                continue
+                s = s.lstrip("*").strip()
+                if not s:
+                    continue
             if is_header(s):
                 continue
             texts.append(s)
@@ -261,9 +286,11 @@ def parse_sheet(ws, cat_slug: str, used: set[str]) -> list[dict]:
             if low.startswith("ендоліфт") and "додатков" not in low and "анестезія" not in low and not low.startswith("кожна"):
                 featured = True
 
+        name = {
+            "загальна анестезія додатково 1 год": "Загальна анестезія додатково, 1 год",
+            "додатково оплачується ПГД (до 3зразків)": "ПГД (до 3 зразків)",
+        }.get(name, name)
         item = {"slug": slug, "name": name, "price": int(money[-1]), "featured": featured}
-        if len(texts) > 1:
-            item["price_label"] = texts[1]
         # Duplicate biorevitalization rows — keep both with unique slugs already handled
         services.append(item)
     return services
@@ -301,39 +328,6 @@ def main() -> None:
             }
         )
         print(cat_slug, len(services))
-
-    # Keep otolaryngology category for non-surgical LOR procedures that remain useful
-    catalog.insert(
-        1,
-        {
-            "slug": "otolaryngology",
-            "name": {
-                "uk": "Отоларингологія",
-                "en": "Otolaryngology",
-                "ru": "Отоларингология",
-            },
-            "description": {
-                "uk": "Лікування захворювань вуха, горла та носа",
-                "en": "Treatment of ear, nose and throat conditions",
-                "ru": "Лечение заболеваний уха, горла и носа",
-            },
-            "featured": False,
-            "services": [
-                {
-                    "slug": "tonsil-lacunae-washing",
-                    "name": "Промивання лакун мигдаликів",
-                    "price": 700,
-                    "featured": False,
-                },
-                {
-                    "slug": "cuckoo-nasal-toilet",
-                    "name": "Туалет носової порожнини, «кукушка»",
-                    "price": 700,
-                    "featured": False,
-                },
-            ],
-        },
-    )
 
     OUT.write_text(json.dumps(catalog, ensure_ascii=False, indent=2), encoding="utf-8")
     print("wrote", OUT, "categories", len(catalog), "services", sum(len(c["services"]) for c in catalog))

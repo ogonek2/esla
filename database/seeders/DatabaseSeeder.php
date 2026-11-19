@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\ClinicSetting;
+use App\Models\Direction;
 use App\Models\Doctor;
 use App\Models\FaqItem;
 use App\Models\Page;
@@ -64,6 +65,7 @@ class DatabaseSeeder extends Seeder
         // Full price catalog + About page from clinic price list / brief (after pages so About wins)
         $this->call(PriceListSeeder::class);
         $this->seedFaq();
+        $this->seedDirections();
         $this->seedDoctors();
         $this->seedPosts();
         $this->seedReviews();
@@ -546,51 +548,90 @@ class DatabaseSeeder extends Seeder
         }
     }
 
+    private function seedDirections(): void
+    {
+        $items = [
+            ['slug' => 'consultations', 'sort' => 1, 'photo' => '2.jpg', 'name' => $this->t3('Консультації', 'Consultations', 'Консультации')],
+            ['slug' => 'cosmetology', 'sort' => 2, 'photo' => '3.jpg', 'name' => $this->t3('Косметологія', 'Cosmetology', 'Косметология')],
+            ['slug' => 'dermatology', 'sort' => 3, 'photo' => '4.jpg', 'name' => $this->t3('Дерматологія', 'Dermatology', 'Дерматология')],
+            ['slug' => 'trichology', 'sort' => 4, 'photo' => '2.jpg', 'name' => $this->t3('Трихологія', 'Trichology', 'Трихология')],
+            ['slug' => 'dermatosurgery', 'sort' => 5, 'photo' => '3.jpg', 'name' => $this->t3('Дерматохірургія', 'Dermatosurgery', 'Дерматохирургия')],
+            ['slug' => 'plastic-surgery', 'sort' => 6, 'photo' => '4.jpg', 'name' => $this->t3('Пластична хірургія', 'Plastic surgery', 'Пластическая хирургия')],
+            ['slug' => 'lor-surgery', 'sort' => 7, 'photo' => '2.jpg', 'name' => $this->t3('ЛОР-хірургія', 'ENT surgery', 'ЛОР-хирургия')],
+            ['slug' => 'device-cosmetology', 'sort' => 8, 'photo' => '3.jpg', 'name' => $this->t3('Апаратна косметологія', 'Device cosmetology', 'Аппаратная косметология')],
+            ['slug' => 'endolift-laser', 'sort' => 9, 'photo' => '4.jpg', 'name' => $this->t3('Лазер ENDOLIFT', 'ENDOLIFT laser', 'Лазер ENDOLIFT')],
+        ];
+
+        $dir = storage_path('app/public/directions');
+        if (! is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+        $photoRoot = dirname(base_path(), 2).DIRECTORY_SEPARATOR.'client'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR;
+
+        foreach ($items as $item) {
+            $imagePath = null;
+            $source = $photoRoot.$item['photo'];
+            $targetName = $item['slug'].'.jpg';
+            if (is_file($source)) {
+                copy($source, $dir.DIRECTORY_SEPARATOR.$targetName);
+                $imagePath = 'directions/'.$targetName;
+            }
+
+            Direction::query()->firstOrCreate(
+                ['slug' => $item['slug']],
+                [
+                    'name' => $item['name'],
+                    'image_path' => $imagePath,
+                    'sort' => $item['sort'],
+                    'is_active' => true,
+                ]
+            );
+        }
+    }
+
     private function seedDoctors(): void
     {
         $doctors = [
             [
-                'slug' => 'plastic-surgeon',
-                'name' => $this->t3('Пластичний хірург', 'Plastic surgeon', 'Пластический хирург'),
+                'slug' => 'maryana-bandurka',
+                'name' => $this->t3(
+                    'Марʼяна Григорівна Бандурка (Кіншина)',
+                    'Maryana Hryhorivna Bandurka (Kinshyna)',
+                    'Марьяна Григорьевна Бандурка (Киншина)'
+                ),
                 'position' => $this->t3(
-                    'Пластична хірургія обличчя та шиї',
-                    'Face and neck plastic surgery',
-                    'Пластическая хирургия лица и шеи'
+                    'Медичний директор клініки ESLA, ЛОР-хірург, пластичний хірург',
+                    'Medical director of ESLA clinic, ENT surgeon, plastic surgeon',
+                    'Медицинский директор клиники ESLA, ЛОР-хирург, пластический хирург'
                 ),
                 'bio' => $this->t3(
-                    'Профіль лікаря буде оновлено клінікою: освіта, спеціалізація та досвід. Запис на консультацію — через форму або телефон.',
-                    'Doctor profile will be updated by the clinic: education, specialization and experience. Book via the form or phone.',
-                    'Профиль врача будет обновлен клиникой: образование, специализация и опыт. Запись — через форму или телефон.'
+                    "Досвід в медицині з 2015 року.\n\nЗакінчила НМУ ім. О. О. Богомольця, спеціальність «Лікувальна справа», інтернатура за напрямком «Оториноларингологія», спеціалізація із «Загальна хірургія» та «Реконструктивна та пластична хірургія».\n\nСтажування: Австрія (Грац, ендоскопічна синус-хірургія, ринопластика), Туреччина (Стамбул), Грузія (Тбілісі), Італія (Турин, лазерна хірургія).\n\nКурси: базова косметологія, ботулінотерапія, колагеностимулятори, контурна пластика, мезотерапія, біоревіталізація.\n\nЛікар проводить:\n• блефаропластика, підтяжка обличчя, ринопластика, ліпосакція\n• контурна пластика обличчя (збільшення губ, корекція скул, підборіддя, носослізної борозни)\n• ліпофілінг, плазмоліфтинг\n• лікування рубців будь-якої складності\n• ЛОР-операції (септопластика, аденотомія, гайморотомія, лазерне лікування храпу)\n\nДевіз: «Здоровʼя треба берегти, а за щастя — боротися.»",
+                    "In medicine since 2015.\n\nGraduated from Bogomolets National Medical University, specialty General Medicine. Internship in Otolaryngology. Specialization in General Surgery and Reconstructive and Plastic Surgery.\n\nFellowships: Austria (Graz — endoscopic sinus surgery, rhinoplasty), Turkey (Istanbul), Georgia (Tbilisi), Italy (Turin — laser surgery).\n\nCourses: basic cosmetology, botulinum therapy, collagen stimulators, facial contouring, mesotherapy, biorevitalization.\n\nProcedures:\n• blepharoplasty, facelift, rhinoplasty, liposuction\n• facial contouring (lip augmentation, cheeks, chin, tear trough)\n• lipofilling, plasma lifting\n• scar treatment of any complexity\n• ENT surgery (septoplasty, adenotomy, maxillary sinus surgery, laser treatment of snoring)\n\nMotto: “Take care of your health, and fight for your happiness.”",
+                    "Опыт в медицине с 2015 года.\n\nОкончила НМУ им. А. А. Богомольца, специальность «Лечебное дело», интернатура по направлению «Оториноларингология», специализация по «Общей хирургии» и «Реконструктивной и пластической хирургии».\n\nСтажировки: Австрия (Грац, эндоскопическая синус-хирургия, ринопластика), Турция (Стамбул), Грузия (Тбилиси), Италия (Турин, лазерная хирургия).\n\nКурсы: базовая косметология, ботулинотерапия, коллагеностимуляторы, контурная пластика, мезотерапия, биоревитализация.\n\nВрач проводит:\n• блефаропластика, подтяжка лица, ринопластика, липосакция\n• контурная пластика лица (увеличение губ, коррекция скул, подбородка, носослёзной борозды)\n• липофилинг, плазмолифтинг\n• лечение рубцов любой сложности\n• ЛОР-операции (септопластика, аденотомия, гайморотомия, лазерное лечение храпа)\n\nДевиз: «Здоровье надо беречь, а за счастье — бороться.»"
                 ),
-                'experience_years' => null,
+                'experience_years' => 11,
                 'sort' => 1,
-                'services' => ['blepharoplasty-circular', 'blepharoplasty-upper', 'rhinoplasty-full', 'endolift-face'],
-            ],
-            [
-                'slug' => 'ent-surgeon',
-                'name' => $this->t3('ЛОР-хірург', 'ENT surgeon', 'ЛОР-хирург'),
-                'position' => $this->t3('Отоларингологія та ЛОР-хірургія', 'Otolaryngology and ENT surgery', 'Отоларингология и ЛОР-хирургия'),
-                'bio' => $this->t3(
-                    'Профіль лікаря буде оновлено клінікою. Консультація ЛОРа доступна в каталозі послуг.',
-                    'Doctor profile will be updated by the clinic. ENT consultation is available in the services catalog.',
-                    'Профиль врача будет обновлен клиникой. Консультация ЛОРа доступна в каталоге услуг.'
-                ),
-                'experience_years' => null,
-                'sort' => 2,
-                'services' => ['lor-consultation', 'septoplasty', 'rhinoseptoplasty', 'laser-snoring'],
-            ],
-            [
-                'slug' => 'cosmetologist',
-                'name' => $this->t3('Лікар-косметолог', 'Cosmetologist', 'Врач-косметолог'),
-                'position' => $this->t3('Інʼєкційна та апаратна косметологія', 'Injectable and device cosmetology', 'Инъекционная и аппаратная косметология'),
-                'bio' => $this->t3(
-                    'Профіль лікаря буде оновлено клінікою. Перелік процедур — у розділі «Косметологія».',
-                    'Doctor profile will be updated by the clinic. Procedures are listed under Cosmetology.',
-                    'Профиль врача будет обновлен клиникой. Список процедур — в разделе «Косметология».'
-                ),
-                'experience_years' => null,
-                'sort' => 3,
-                'services' => ['cosmetologist-consultation', 'botox', 'mesotherapy', 'biorevitalization'],
+                'services' => [
+                    'plastic-surgeon-consultation',
+                    'lor-consultation',
+                    'blepharoplasty-circular',
+                    'blepharoplasty-upper',
+                    'blepharoplasty-lower',
+                    'facelift-circular',
+                    'face-neck-lift',
+                    'rhinoplasty-full',
+                    'rhinoplasty-partial',
+                    'rhinoseptoplasty',
+                    'chin-liporeduction',
+                    'face-lipofilling',
+                    'lip-augmentation',
+                    'face-contour-phillex',
+                    'plasma-therapy',
+                    'scar-excision',
+                    'scar-excision-5cm',
+                    'septoplasty',
+                    'laser-snoring',
+                ],
             ],
         ];
 
@@ -609,6 +650,10 @@ class DatabaseSeeder extends Seeder
             $ids = Service::query()->whereIn('slug', $serviceSlugs)->pluck('id');
             $doctor->services()->sync($ids);
         }
+
+        Doctor::query()
+            ->whereIn('slug', ['plastic-surgeon', 'ent-surgeon', 'cosmetologist'])
+            ->update(['is_active' => false]);
     }
 
     private function seedPosts(): void
@@ -808,7 +853,7 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        $doctorId = Doctor::query()->where('slug', 'plastic-surgeon')->value('id');
+        $doctorId = Doctor::query()->where('slug', 'maryana-bandurka')->value('id');
 
         foreach ($cases as $case) {
             $serviceId = Service::query()->where('slug', $case['service'])->value('id');

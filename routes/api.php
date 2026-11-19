@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\ClinicController;
+use App\Http\Controllers\Api\V1\DirectionController;
 use App\Http\Controllers\Api\V1\DoctorController;
 use App\Http\Controllers\Api\V1\FaqController;
 use App\Http\Controllers\Api\V1\LeadController;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/clinic', ClinicController::class)->name('clinic.show');
 Route::get('/service-categories', [ServiceCategoryController::class, 'index'])->name('service-categories.index');
+Route::get('/directions', [DirectionController::class, 'index'])->name('directions.index');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index');

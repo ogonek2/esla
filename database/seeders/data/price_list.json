@@ -21,7 +21,7 @@
       },
       {
         "slug": "dermatosurgeon-consultation",
-        "name": "Консультація дерматохірурга/дерматолога із дерматоскопією",
+        "name": "Консультація дерматохірурга",
         "price": 1290,
         "featured": false
       },
@@ -32,11 +32,22 @@
         "featured": false
       },
       {
+        "slug": "oncodermatologist-consultation",
+        "name": "Консультація онкодерматолога",
+        "price": 1600,
+        "featured": false
+      },
+      {
+        "slug": "pediatric-dermatologist-consultation",
+        "name": "Консультація дитячого дерматолога",
+        "price": 1290,
+        "featured": false
+      },
+      {
         "slug": "weight-management-program",
         "name": "Комплексне ведення з приводу зниження маси тіла, 5 консультацій суміжних спеціальністів, план обстеження, лікування, повний супровід напротязі 3х міс",
         "price": 9900,
-        "featured": false,
-        "price_label": "3 міс"
+        "featured": false
       },
       {
         "slug": "trichologist-consultation",
@@ -59,29 +70,47 @@
     ]
   },
   {
-    "slug": "otolaryngology",
+    "slug": "diagnostics",
     "name": {
-      "uk": "Отоларингологія",
-      "en": "Otolaryngology",
-      "ru": "Отоларингология"
+      "uk": "Діагностика",
+      "en": "Diagnostics",
+      "ru": "Диагностика"
     },
     "description": {
-      "uk": "Лікування захворювань вуха, горла та носа",
-      "en": "Treatment of ear, nose and throat conditions",
-      "ru": "Лечение заболеваний уха, горла и носа"
+      "uk": "Дерматоскопія, біопсія та місцева анестезія",
+      "en": "Дерматоскопія, біопсія та місцева анестезія",
+      "ru": "Дерматоскопія, біопсія та місцева анестезія"
     },
     "featured": false,
     "services": [
       {
-        "slug": "tonsil-lacunae-washing",
-        "name": "Промивання лакун мигдаликів",
-        "price": 700,
+        "slug": "dermatoscopy-up-to-3",
+        "name": "Дерматоскопія новоутворень (до 3х елементів)",
+        "price": 550,
         "featured": false
       },
       {
-        "slug": "cuckoo-nasal-toilet",
-        "name": "Туалет носової порожнини, «кукушка»",
-        "price": 700,
+        "slug": "dermatoscopy-3-to-10",
+        "name": "Дерматоскопія новоутворень (від 3 до 10)",
+        "price": 1400,
+        "featured": false
+      },
+      {
+        "slug": "dermatoscopy-over-10",
+        "name": "Дерматоскопія новоутворень (понад 10)",
+        "price": 2200,
+        "featured": false
+      },
+      {
+        "slug": "punch-biopsy",
+        "name": "Панч біопсія шкіри",
+        "price": 1900,
+        "featured": false
+      },
+      {
+        "slug": "infiltration-anesthesia",
+        "name": "Інфільтраційна місцева анестезія",
+        "price": 400,
         "featured": false
       }
     ]
@@ -243,6 +272,18 @@
         "featured": false
       },
       {
+        "slug": "face-massage-30",
+        "name": "Масаж обличчя, 30хв",
+        "price": 750,
+        "featured": false
+      },
+      {
+        "slug": "face-massage-course-10x30",
+        "name": "Курс 10 масажів обличчя по 30хв",
+        "price": 6500,
+        "featured": false
+      },
+      {
         "slug": "massage-course-5x40",
         "name": "Курс 5 масажів по 40хв",
         "price": 3500,
@@ -263,13 +304,13 @@
       {
         "slug": "body-wrap",
         "name": "Обгортання (зволожуюче, розслабляюче, антицелюлітне (Arosha|DMK)",
-        "price": 2200,
+        "price": 2800,
         "featured": false
       },
       {
         "slug": "body-wrap-course-5",
         "name": "Курс 5 обгортань",
-        "price": 9900,
+        "price": 12500,
         "featured": false
       },
       {
@@ -400,22 +441,19 @@
         "slug": "exosomes-alopecia-course",
         "name": "Екзосоми, курс при алопеції (3 процедури), Good Cells, Україна",
         "price": 28900,
-        "featured": false,
-        "price_label": "3 процедури"
+        "featured": false
       },
       {
         "slug": "exosomes-skin-course",
         "name": "Екзосоми, для відновлення шкіри, курс 3 процедури, Good Cells, Україна",
         "price": 34500,
-        "featured": false,
-        "price_label": "3 процедури"
+        "featured": false
       },
       {
         "slug": "exosomes-after-peel",
         "name": "Екзосоми після хімічного пілінгу",
         "price": 5500,
-        "featured": false,
-        "price_label": "1 процедура"
+        "featured": false
       }
     ]
   },
@@ -616,6 +654,12 @@
         "name": "Ліпоредукція холки",
         "price": 48900,
         "featured": false
+      },
+      {
+        "slug": "plastic-general-anesthesia",
+        "name": "Загальна анестезія додатково, 1 год",
+        "price": 5500,
+        "featured": false
       }
     ]
   },
@@ -749,6 +793,30 @@
         "slug": "benign-removal-3",
         "name": "Видалення доброякісних новоутворень шкіри (інтимні ділянки) 3кат",
         "price": 2000,
+        "featured": false
+      },
+      {
+        "slug": "histology-pgd",
+        "name": "ПГД (до 3 зразків)",
+        "price": 1890,
+        "featured": false
+      },
+      {
+        "slug": "cryodestruction-1-5",
+        "name": "Кріодеструкція 1-5 елементів",
+        "price": 900,
+        "featured": false
+      },
+      {
+        "slug": "cryodestruction-5-10",
+        "name": "Кріодеструкція 5-10 елементів",
+        "price": 1400,
+        "featured": false
+      },
+      {
+        "slug": "cryodestruction-over-10",
+        "name": "Кріодеструкція понад 10 елементів",
+        "price": 2500,
         "featured": false
       }
     ]
