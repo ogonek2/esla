@@ -226,7 +226,7 @@ export function ContactsPage() {
         title={t('contacts.title')}
         subtitle={t('contacts.page_subtitle')}
         art={2}
-        image="/public/photo_2026-11-19_12-01-03.jpg"
+        image="/photo_2026-11-19_12-01-03.jpg"
         actions={
           phoneHref ? (
             <a

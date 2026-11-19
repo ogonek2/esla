@@ -76,7 +76,7 @@ export function EndoliftSection({ featured }: { featured: Service[] }) {
                   className="aspect-[3/4] bg-cover bg-center ken-burns"
                   style={{
                     backgroundImage:
-                      'url(/public/1.jpg)',
+                      'url(/1.jpg)',
                   }}
                 />
               </Parallax>
