@@ -27,9 +27,28 @@ class AdminPanelProvider extends PanelProvider
     {
         FilamentView::registerRenderHook(
             PanelsRenderHook::HEAD_END,
-            fn (): HtmlString => new HtmlString(
-                '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />'
-            ),
+            fn (): HtmlString => new HtmlString(<<<'HTML'
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script>
+(function () {
+  try {
+    var raw = localStorage.getItem('collapsedGroups')
+    if (raw === null || raw === 'null' || raw === 'undefined') {
+      localStorage.setItem('collapsedGroups', '[]')
+    }
+  } catch (e) {}
+
+  var patchSidebar = function () {
+    var store = window.Alpine && Alpine.store && Alpine.store('sidebar')
+    if (!store || Array.isArray(store.collapsedGroups)) return
+    store.collapsedGroups = []
+  }
+
+  document.addEventListener('alpine:initialized', patchSidebar)
+  document.addEventListener('livewire:navigated', patchSidebar)
+})()
+</script>
+HTML),
         );
 
         return $panel
