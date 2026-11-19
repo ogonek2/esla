@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { api } from '@/shared/lib/api'
 import type {
+  Direction,
   Doctor,
   FaqItem,
   PortfolioCase,
@@ -39,6 +40,7 @@ async function settledData<T>(promise: Promise<T>, fallback: T): Promise<T> {
 
 type HomeBundle = {
   categories: ServiceCategory[]
+  directions: Direction[]
   services: Service[]
   featured: Service[]
   doctors: Doctor[]
@@ -74,8 +76,9 @@ export function HomePage() {
       // Keep previous content while soft-refreshing on locale change if we already have data
       if (!bundle) setLoading(true)
       try {
-        const [cats, allServices, featuredRes, docs, port, revs, blog, faqs] = await Promise.all([
+        const [cats, directions, allServices, featuredRes, docs, port, revs, blog, faqs] = await Promise.all([
           api.serviceCategories(locale),
+          settledData(api.directions(locale), [] as Direction[]),
           api.services(locale, { per_page: 100 }),
           settledData(api.services(locale, { featured: true, per_page: 20 }), {
             data: [] as Service[],
@@ -89,6 +92,7 @@ export function HomePage() {
         if (cancelled) return
         setBundle({
           categories: cats || [],
+          directions: directions || [],
           services: allServices?.data || [],
           featured: featuredRes?.data || [],
           doctors: docs?.data || [],
@@ -109,18 +113,6 @@ export function HomePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: reload on locale; bundle omit avoids loop
   }, [locale])
 
-  const minPrices = useMemo(() => {
-    const map: Record<string, number | null> = {}
-    for (const s of bundle?.services || []) {
-      const slug = s.category?.slug
-      if (!slug || s.price_from == null) continue
-      if (map[slug] == null || (map[slug] as number) > s.price_from) {
-        map[slug] = s.price_from
-      }
-    }
-    return map
-  }, [bundle?.services])
-
   if (error && !bundle) {
     return (
       <div className="max-w-xl mx-auto px-6 py-32 text-center">
@@ -140,7 +132,7 @@ export function HomePage() {
   if (loading && !bundle) {
     return (
       <>
-        <Seo description={t('hero.subtitle')} jsonLd={orgLd} />
+        <Seo description={t('hero.seo_description')} jsonLd={orgLd} />
         <HeroSection />
         <HomeSkeleton />
       </>
@@ -151,10 +143,10 @@ export function HomePage() {
 
   return (
     <>
-      <Seo description={t('hero.subtitle')} jsonLd={orgLd} />
+      <Seo description={t('hero.seo_description')} jsonLd={orgLd} />
       <HeroSection />
       <EndoliftSection featured={data.featured} />
-      <ServicesSection categories={data.categories} minPrices={minPrices} />
+      <ServicesSection directions={data.directions} />
       <DoctorsSection doctors={data.doctors} />
       <WhyEslaSection />
       <PortfolioSection cases={data.portfolio} />

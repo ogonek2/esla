@@ -57,16 +57,14 @@ export function HeroSection() {
             </p>
           </Reveal>
           <Reveal delay={160}>
-            <h1 className="text-hero font-normal font-display mb-8">
+            <h1 className="font-normal font-display mb-7 max-w-4xl text-[clamp(1.85rem,4.4vw,4.15rem)] leading-[1.16] tracking-[-0.02em]">
               {t('hero.title_line1')}
               <br />
               <em className="gold-shimmer">{t('hero.title_line2')}</em>
-              <br />
-              {t('hero.title_line3')}
             </h1>
           </Reveal>
           <Reveal delay={280}>
-            <p className="text-lead text-white/70 mb-12 max-w-2xl font-light">
+            <p className="text-[clamp(1rem,1.35vw,1.2rem)] leading-relaxed text-white/75 mb-12 max-w-2xl font-light">
               {t('hero.subtitle')}
             </p>
           </Reveal>

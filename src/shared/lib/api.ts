@@ -2,6 +2,7 @@ import type { Locale } from '@/shared/config/locales'
 import { CACHE_TTL, cacheGet, cacheKey, cacheSet } from '@/shared/lib/cache'
 import type {
   Clinic,
+  Direction,
   Doctor,
   FaqItem,
   LeadPayload,
@@ -165,6 +166,12 @@ export const api = {
 
   serviceCategories: (locale?: Locale) =>
     request<{ data: ServiceCategory[] }>('/service-categories', {
+      locale,
+      cache: CACHE_TTL.default,
+    }).then((r) => r.data),
+
+  directions: (locale?: Locale) =>
+    request<{ data: Direction[] }>('/directions', {
       locale,
       cache: CACHE_TTL.default,
     }).then((r) => r.data),

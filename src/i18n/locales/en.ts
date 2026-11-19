@@ -17,10 +17,11 @@ export default {
   },
   hero: {
     eyebrow: 'Medical center',
-    title_line1: 'Premium',
-    title_line2: 'plastic',
-    title_line3: 'surgery',
+    title_line1: 'Ugly is not a diagnosis,',
+    title_line2: 'old is not a sentence',
     subtitle:
+      'I am Maryana Bandurka, a plastic surgeon with over 10 years in medicine, and I invite you to become the version of yourself you have always dreamed of',
+    seo_description:
       'Endolift, face and neck plastics, ENT surgery and cosmetology. Individual care, modern equipment, experienced surgeons.',
     cta_book: 'Book a consultation',
   },
@@ -28,7 +29,8 @@ export default {
     eyebrow: 'Priority service',
     title: 'Endolift — laser lift',
     subtitle:
-      'A minimally invasive laser lifting method. Detailed medical information is provided by the clinic during consultation.',
+      'Our goal is not simply to change your appearance, but to help you feel confident — preserving naturalness and respect for your individuality.',
+    tagline: 'ESLA — complete care for health, beauty, and confidence',
     cta: 'Book Endolift',
     learn_more: 'About the device',
   },
@@ -161,7 +163,8 @@ export default {
     title: 'Our services',
     page_subtitle:
       'Premium plastic surgery, Endolift, ENT and cosmetology — in a structured catalog.',
-    subtitle: 'From consultation to surgery — full care in one center.',
+    subtitle:
+      'From consultation, diagnostics and basic care — to surgery — the full cycle in one center.',
     cta: 'Book a consultation',
     empty: 'Services will appear after content is published.',
     price_on_request: 'on request',

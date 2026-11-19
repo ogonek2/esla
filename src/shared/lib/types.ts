@@ -3,6 +3,15 @@ export type SeoFields = {
   description?: string | null
 }
 
+export type Direction = {
+  id: number
+  slug: string
+  name: string
+  image_url?: string | null
+  sort: number
+  category_slug?: string | null
+}
+
 export type ServiceCategory = {
   id: number
   slug: string

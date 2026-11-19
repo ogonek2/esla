@@ -86,9 +86,6 @@ body {
   line-height: 1.12;
   letter-spacing: -0.015em;
   max-width: 100%;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  hyphens: auto;
 }
 
 .text-title {
@@ -323,7 +320,6 @@ body {
 }
 
 .ken-burns {
-  animation: ken-burns 22s ease-in-out infinite alternate;
   transform-origin: center center;
 }
 

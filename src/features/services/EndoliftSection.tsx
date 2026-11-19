@@ -29,7 +29,10 @@ export function EndoliftSection({ featured }: { featured: Service[] }) {
               {t('endolift.eyebrow')}
             </p>
             <h2 className="text-display font-normal mb-7 font-display">{t('endolift.title')}</h2>
-            <p className="text-lead text-white/60 mb-10 max-w-xl">{t('endolift.subtitle')}</p>
+            <p className="text-lead text-white/65 mb-4 max-w-xl">{t('endolift.subtitle')}</p>
+            <p className="text-[15px] md:text-[17px] leading-relaxed text-[#c8a97e] mb-10 max-w-xl">
+              {t('endolift.tagline')}
+            </p>
             {zones.length > 0 && (
               <ul className="space-y-4 mb-12 border-l border-white/15 pl-6">
                 {zones.map((zone, i) => (
@@ -73,7 +76,7 @@ export function EndoliftSection({ featured }: { featured: Service[] }) {
                   className="aspect-[3/4] bg-cover bg-center ken-burns"
                   style={{
                     backgroundImage:
-                      'url(https://images.unsplash.com/photo-1785861378703-1c991c4548ef?w=1200&h=1600&fit=crop&auto=format)',
+                      'url(/public/1.jpg)',
                   }}
                 />
               </Parallax>

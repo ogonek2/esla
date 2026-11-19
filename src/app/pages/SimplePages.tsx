@@ -226,7 +226,7 @@ export function ContactsPage() {
         title={t('contacts.title')}
         subtitle={t('contacts.page_subtitle')}
         art={2}
-        image="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=900&fit=crop&auto=format"
+        image="/public/photo_2026-11-19_12-01-03.jpg"
         actions={
           phoneHref ? (
             <a
