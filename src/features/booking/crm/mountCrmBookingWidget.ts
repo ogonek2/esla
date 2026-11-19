@@ -49,8 +49,8 @@ export function mountCrmBookingWidget(
     BASE_URL: (userConfig.baseUrl || 'https://1cloud.in.ua/EslaSSE/hs/SiteServiceEntry').replace(/\/$/, ''),
     CLINIC_NAME: userConfig.clinicName || 'ESLA',
     CLINIC_PHONES: userConfig.clinicPhones?.length ? userConfig.clinicPhones : [],
-    DRY_RUN: userConfig.dryRun !== false,
-    ENTRIES_PATH: userConfig.entriesPath || '/entries',
+    DRY_RUN: userConfig.dryRun === true,
+    ENTRIES_PATH: userConfig.entriesPath || '/post/entries',
   };
 
 /* ============================================================
@@ -156,11 +156,6 @@ export function mountCrmBookingWidget(
       return fetchJSON('/timeslots', { date, resource_id, service_id });
     },
 
-    // ==== PostEntries: НАВМИСНО НЕ ПІДКЛЮЧЕНО ====
-    // Шлях і формат ще не підтверджені власником. Поки що працює
-    // тільки dry-run режим (лог у консоль). Якщо хтось випадково
-    // виставить CONFIG.DRY_RUN = false без додавання реального шляху —
-    // функція навмисно кидає помилку, а не робить запит навмання.
     async postEntries(payload){
       // Always notify parent SPA so ESLA lead API also receives the booking.
       if (typeof onBooking === 'function') {
@@ -176,7 +171,7 @@ export function mountCrmBookingWidget(
       }
 
       if (CONFIG.DRY_RUN){
-        console.log('%c[ESLA] CRM PostEntries dry-run (1С path not confirmed yet):', 'color:#c8a97e;font-weight:bold', payload);
+        console.log('%c[ESLA] CRM PostEntries dry-run:', 'color:#c8a97e;font-weight:bold', payload);
         await delay(450);
         return {
           is_occupied: false,
@@ -184,12 +179,15 @@ export function mountCrmBookingWidget(
         };
       }
 
-      const url = CONFIG.BASE_URL + (CONFIG.ENTRIES_PATH || '/entries');
+      const url = CONFIG.BASE_URL + (CONFIG.ENTRIES_PATH || '/post/entries');
       let res;
       try {
         res = await fetch(url, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            Accept: 'application/json',
+          },
           body: JSON.stringify(payload),
         });
       } catch (e) {

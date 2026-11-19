@@ -90,8 +90,8 @@ export function mountCrmBookingWidget(
     BASE_URL: (userConfig.baseUrl || 'https://1cloud.in.ua/EslaSSE/hs/SiteServiceEntry').replace(/\\/$/, ''),
     CLINIC_NAME: userConfig.clinicName || 'ESLA',
     CLINIC_PHONES: userConfig.clinicPhones?.length ? userConfig.clinicPhones : [],
-    DRY_RUN: userConfig.dryRun !== false,
-    ENTRIES_PATH: userConfig.entriesPath || '/entries',
+    DRY_RUN: userConfig.dryRun === true,
+    ENTRIES_PATH: userConfig.entriesPath || '/post/entries',
   };
 
 ${body}

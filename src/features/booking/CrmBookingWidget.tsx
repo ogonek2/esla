@@ -89,7 +89,8 @@ export function CrmBookingWidget() {
         baseUrl: CRM_BASE,
         clinicName: 'ESLA',
         clinicPhones: phones,
-        dryRun: true,
+        dryRun: false,
+        entriesPath: '/post/entries',
       },
       onBooking,
     )
